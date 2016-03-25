@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.eticaret.onlinecv_OnlineCV_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.eticaret.onlinecv.entity.Dil</class>
+    <class>com.eticaret.onlinecv.entity.Teknoloji</class>
+    <class>com.eticaret.onlinecv.entity.Universite</class>
+    <class>com.eticaret.onlinecv.entity.Kullanici</class>
+    <class>com.eticaret.onlinecv.entity.Sirketproje</class>
+    <class>com.eticaret.onlinecv.entity.Ilan</class>
+    <class>com.eticaret.onlinecv.entity.Sirketozbilgi</class>
+    <class>com.eticaret.onlinecv.entity.Kullanicidil</class>
+    <class>com.eticaret.onlinecv.entity.Proje</class>
+    <class>com.eticaret.onlinecv.entity.Sirket</class>
+    <class>com.eticaret.onlinecv.entity.Bolum</class>
+    <class>com.eticaret.onlinecv.entity.Kullaniciozbilgi</class>
+    <class>com.eticaret.onlinecv.entity.Projeteknoloji</class>
+    <class>com.eticaret.onlinecv.entity.Ilanteknoloji</class>
+    <class>com.eticaret.onlinecv.entity.Kullaniciteknoloji</class>
+    <class>com.eticaret.onlinecv.entity.Sprojetek</class>
+    <class>com.eticaret.onlinecv.entity.Sirketteknoloji</class>
+    <class>com.eticaret.onlinecv.entity.Kullaniciproje</class>
+    <class>com.eticaret.onlinecv.entity.Basvuru</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/OnlineCV?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="kosesakal"/>
+    </properties>
+  </persistence-unit>
+</persistence>
