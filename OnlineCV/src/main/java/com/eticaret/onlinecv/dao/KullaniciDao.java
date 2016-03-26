@@ -5,10 +5,14 @@
  */
 package com.eticaret.onlinecv.dao;
 
+import com.eticaret.onlinecv.entity.Kullanici;
+
 /**
  *
  * @author ali
  */
 public interface KullaniciDao {
+    
+    public Kullanici girKontrol(Kullanici k);
     
 }
