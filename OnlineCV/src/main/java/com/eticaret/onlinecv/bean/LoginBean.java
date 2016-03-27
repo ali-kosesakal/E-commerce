@@ -37,14 +37,18 @@ public class LoginBean implements Serializable {
         System.out.println("calisti");
     }
 
-    public String girisKontrol() {
+    public String girisKontrol() throws InterruptedException {
 //        Kullanici u = new Kullanici();
 //        u.setEmail(k.getEmail());
 //        u.setParola(k.getParola());
 //
 //        k = kullaniciDao.girKontrol(u);
-        Kullanici ku = kullaniciDao.girKontrol(k);
-        if (k != null) {
+        
+        Kullanici ku = kullaniciDao.girKontrol(k,serialVersionUID);
+        Thread.sleep(2000);
+       
+        
+        if (ku != null) {
             return navigationBean.redirectKullaniciProfil();
         } else {
             System.out.println("giriş yanlış");

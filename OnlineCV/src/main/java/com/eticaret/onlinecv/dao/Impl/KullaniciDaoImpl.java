@@ -26,19 +26,20 @@ public class KullaniciDaoImpl implements KullaniciDao {
 
     //Kullanici girişi kontrolü
     @Override
-    public Kullanici girKontrol(Kullanici k) {
+    public Kullanici girKontrol(Kullanici k, Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();        
         String sorgu = "Select u from Kullanici u WHERE k_email = :email AND k_parola= :parola";
         System.out.println("    girisyap");
         try {
+            System.out.println("    try içine girdi");
             Query q = session.createQuery(sorgu);
             q.setParameter("k_email", k.getEmail());
             q.setParameter("k_parola", k.getParola());
 
-            Kullanici u = (Kullanici) q.uniqueResult();
+            //Kullanici u = (Kullanici) q.uniqueResult();
             System.out.println("    try içine girdi");
-
+           Kullanici u = (Kullanici) session.get(Kullanici.class,id );
             session.close();
             return u;
         } catch (Exception e) {
