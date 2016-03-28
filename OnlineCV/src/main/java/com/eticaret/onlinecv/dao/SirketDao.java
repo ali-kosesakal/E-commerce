@@ -5,10 +5,12 @@
  */
 package com.eticaret.onlinecv.dao;
 
+import com.eticaret.onlinecv.entity.Sirket;
+
 /**
  *
  * @author ali
  */
 public interface SirketDao {
-    
+    public Sirket girsKontrol(Sirket s) ;
 }

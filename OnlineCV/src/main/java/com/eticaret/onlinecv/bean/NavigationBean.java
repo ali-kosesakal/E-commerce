@@ -42,4 +42,8 @@ public class NavigationBean implements Serializable{
     public String redirectKullaniciProfil() {
       return "/kullanici/profil?faces-redirect=true";
    }
+    
+    public String redirectSirketProfil() {
+      return "/sirket/profil?faces-redirect=true";
+   }
 }

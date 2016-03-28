@@ -9,6 +9,8 @@ import com.eticaret.onlinecv.bean.HibernateUtil;
 import com.eticaret.onlinecv.dao.KullaniciDao;
 import com.eticaret.onlinecv.entity.Kullanici;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -25,30 +27,52 @@ public class KullaniciDaoImpl implements KullaniciDao, Serializable {
     Session session = null;
     Transaction tx = null;
 
-    //Kullanici girişi kontrolü
+    //Kullanici giriÅŸi kontrolÃ¼
     @Override
     public Kullanici girKontrol(Kullanici k) {
+        
         session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();        
-        System.out.println("        Dao gir kontrole girdi");
-        String sorgu = "from Kullanici as kullanici where kullanici.kullaniciId=1";
+        session.beginTransaction();
+        String sorgu = "Select k from Kullanici k WHERE email = :email AND parola= :parola";
         System.out.println("    girisyap");
+
         try {
-            System.out.println("    try içine girdi");
+            System.out.println("    try iÃ§ine girdi1");
             Query q = session.createQuery(sorgu);
-          // q.setParameter("k_email", k.getEmail());
-          // q.setParameter("k_parola", k.getParola());
+
+            q.setParameter("email", k.getEmail());
+
+            q.setParameter("parola", k.getParola());
+
             Kullanici u = (Kullanici) q.uniqueResult();
-            System.out.println("    try içine girdi");
-            
-          
+
             session.close();
             return u;
         } catch (Exception e) {
             session.close();
             return null;
         }
-//        return null;
     }
-
+//
+//    public void save(Kullanici user) {
+//        session.beginTransaction();
+//        session.save(user);
+//        session.getTransaction().commit();
+//        session.close();
+//    }
+//
+//    public Integer getId() {
+//        String hql = "select count(kullaniciID) from kullanici k";
+//        Query query = session.createQuery(hql);
+//        List<Integer> results = new ArrayList<>();
+//
+//        results = query.list();
+//        Integer kullan = 1;
+//        if (results.get(0) != null) {
+//            System.out.print(kullan);
+//            kullan = results.get(0) + 1;
+//        }
+//        System.out.print(kullan);
+//        return kullan;
+//    }
 }
