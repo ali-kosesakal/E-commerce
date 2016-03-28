@@ -13,6 +13,6 @@ import com.eticaret.onlinecv.entity.Kullanici;
  */
 public interface KullaniciDao {
     
-    public Kullanici girKontrol(Kullanici k, Long id);
+    public Kullanici girKontrol(Kullanici k);
     
 }

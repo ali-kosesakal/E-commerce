@@ -10,6 +10,7 @@ import com.eticaret.onlinecv.dao.KullaniciDao;
 import com.eticaret.onlinecv.entity.Kullanici;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -20,7 +21,7 @@ import javax.faces.bean.SessionScoped;
  * @author esref
  */
 @ManagedBean(name = "loginBean")
-@SessionScoped
+@ApplicationScoped
 public class LoginBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,9 +44,11 @@ public class LoginBean implements Serializable {
 //        u.setParola(k.getParola());
 //
 //        k = kullaniciDao.girKontrol(u);
-        
-        Kullanici ku = kullaniciDao.girKontrol(k,serialVersionUID);
-        Thread.sleep(2000);
+        System.out.println("Giriş kontrole girdi BEAN");
+        Kullanici ku = kullaniciDao.girKontrol(k);
+       // Thread.sleep(2000);
+//        System.out.println(ku.getEmail());
+      //  System.out.println(ku.getParola());
        
         
         if (ku != null) {
