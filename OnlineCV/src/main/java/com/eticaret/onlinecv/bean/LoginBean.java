@@ -44,6 +44,7 @@ public class LoginBean implements Serializable {
 //        u.setParola(k.getParola());
 //System.out.println("calisti");
 System.out.println("calisti");
+System.out.println("calisti");
 //        k = kullaniciDao.girKontrol(u);
         System.out.println("Giriş kontrole girdi BEAN");
         Kullanici ku = kullaniciDao.girKontrol(k);
