@@ -1,12 +1,30 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Üye Ol</title>
     </h:head>
     <h:body>
-        Üye Ol Sayfası
+        <h:form>
+            <p:messages id="messages" showDetail="false" autoUpdate="true"  />
+
+            <h:panelGrid columns="2" id="matchGrid" cellpadding="5"> 
+                <p:outputLabel for="k_ad" value="Ad"/>
+                <p:inputText id="k_ad"  value="#{uyeOl.kozbilgi.ad}" requiredMessage="Adınızı Giriniz"  required="true"/>
+                <p:outputLabel for="k_soyad" value="Soyad"/>
+                <p:inputText id="k_soyad" value="#{uyeOl.kozbilgi.soyad}" requiredMessage="Soyadınızı Giriniz"  required="true"/>
+                <p:outputLabel for="k_email" value="Email"/>
+                <p:inputText id="k_email" value="#{uyeOl.kullanici.email}" requiredMessage="Email Giriniz" required="true"/>
+                <h:outputLabel for="pwd1" value="Parola : *" />
+                <p:password id="pwd1" value="#{uyeOl.kullanici.parola}" validatorMessage="Şifreler Eşleşmiyor" match="pwd2" label="Parola" required="true" />
+                <h:outputLabel for="pwd2" value="Parola Tekrar : *" />
+                <p:password id="pwd2" value="#{uyeOl.kullanici.parola}" label="Parola Tekrar" required="true" />
+            </h:panelGrid>
+            <p:commandButton value="Kaydı Tamamla"  action="#{uyeOl.kaydet}"/>
+        </h:form>
     </h:body>
 </html>
-

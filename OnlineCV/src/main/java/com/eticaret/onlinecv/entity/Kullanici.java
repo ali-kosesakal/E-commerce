@@ -12,21 +12,24 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ali
+ * @author esref
  */
 @Entity
 @Table(name = "kullanici")
@@ -41,8 +44,8 @@ public class Kullanici implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "kullaniciID")
     private Integer kullaniciID;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -57,8 +60,9 @@ public class Kullanici implements Serializable {
     private Date songirtarihi;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "kullaniciID")
     private List<Basvuru> basvuruList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kullaniciID")
-    private List<Kullaniciozbilgi> kullaniciozbilgiList;
+    @JoinColumn(name = "ozbilgiID", referencedColumnName = "ozbilgiID")
+    @ManyToOne(optional = false)
+    private Kullaniciozbilgi ozbilgiID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "kullaniciID")
     private List<Kullaniciteknoloji> kullaniciteknolojiList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "kullaniciID")
@@ -114,13 +118,12 @@ public class Kullanici implements Serializable {
         this.basvuruList = basvuruList;
     }
 
-    @XmlTransient
-    public List<Kullaniciozbilgi> getKullaniciozbilgiList() {
-        return kullaniciozbilgiList;
+    public Kullaniciozbilgi getOzbilgiID() {
+        return ozbilgiID;
     }
 
-    public void setKullaniciozbilgiList(List<Kullaniciozbilgi> kullaniciozbilgiList) {
-        this.kullaniciozbilgiList = kullaniciozbilgiList;
+    public void setOzbilgiID(Kullaniciozbilgi ozbilgiID) {
+        this.ozbilgiID = ozbilgiID;
     }
 
     @XmlTransient

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.eticaret.onlinecv.bean;
+package com.eticaret.onlinecv.dao.Impl;
 
 /**
  *
  * @author ali
  */
-public class test3 {
+public class UniversiteDaoImpl {
     
 }

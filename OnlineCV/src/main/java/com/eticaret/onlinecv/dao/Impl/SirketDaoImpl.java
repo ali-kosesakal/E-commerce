@@ -34,7 +34,6 @@ public class SirketDaoImpl implements SirketDao, Serializable {
         System.out.println("    girisyap");
 
         try {
-            System.out.println("    try iÃ§ine girdi1");
             Query q = session.createQuery(sorgu);
 
             q.setParameter("email", s.getEmail());

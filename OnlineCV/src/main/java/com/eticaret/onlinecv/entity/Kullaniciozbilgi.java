@@ -7,24 +7,30 @@ package com.eticaret.onlinecv.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ali
+ * @author esref
  */
 @Entity
 @Table(name = "kullaniciozbilgi")
@@ -49,20 +55,24 @@ public class Kullaniciozbilgi implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ozbilgiID")
     private Integer ozbilgiID;
-    @Size(max = 15)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "ad")
     private String ad;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "soyad")
     private String soyad;
-    @Size(max = 45)
+    @Size(max = 200)
     @Column(name = "adres")
     private String adres;
-    @Size(max = 15)
+    @Size(max = 10)
     @Column(name = "tel")
     private String tel;
     @Column(name = "dtarihi")
@@ -77,7 +87,7 @@ public class Kullaniciozbilgi implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "agno")
     private Double agno;
-    @Size(max = 45)
+    @Size(max = 100)
     @Column(name = "lise")
     private String lise;
     @Column(name = "lisebastarihi")
@@ -89,14 +99,13 @@ public class Kullaniciozbilgi implements Serializable {
     @Size(max = 300)
     @Column(name = "aciklama")
     private String aciklama;
-    @Size(max = 45)
+    @Size(max = 100)
     @Column(name = "profilresim")
     private String profilresim;
-    @JoinColumn(name = "kullaniciID", referencedColumnName = "kullaniciID")
-    @ManyToOne(optional = false)
-    private Kullanici kullaniciID;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ozbilgiID")
+    private List<Kullanici> kullaniciList;
     @JoinColumn(name = "universiteID", referencedColumnName = "universiteID")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Universite universiteID;
 
     public Kullaniciozbilgi() {
@@ -104,6 +113,12 @@ public class Kullaniciozbilgi implements Serializable {
 
     public Kullaniciozbilgi(Integer ozbilgiID) {
         this.ozbilgiID = ozbilgiID;
+    }
+
+    public Kullaniciozbilgi(Integer ozbilgiID, String ad, String soyad) {
+        this.ozbilgiID = ozbilgiID;
+        this.ad = ad;
+        this.soyad = soyad;
     }
 
     public Integer getOzbilgiID() {
@@ -218,12 +233,13 @@ public class Kullaniciozbilgi implements Serializable {
         this.profilresim = profilresim;
     }
 
-    public Kullanici getKullaniciID() {
-        return kullaniciID;
+    @XmlTransient
+    public List<Kullanici> getKullaniciList() {
+        return kullaniciList;
     }
 
-    public void setKullaniciID(Kullanici kullaniciID) {
-        this.kullaniciID = kullaniciID;
+    public void setKullaniciList(List<Kullanici> kullaniciList) {
+        this.kullaniciList = kullaniciList;
     }
 
     public Universite getUniversiteID() {

@@ -15,4 +15,6 @@ public interface KullaniciDao {
     
     public Kullanici girKontrol(Kullanici k);
     
+    public boolean kaydet(Kullanici k);
+    
 }

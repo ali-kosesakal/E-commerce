@@ -30,7 +30,7 @@ public class KullaniciDaoImpl implements KullaniciDao, Serializable {
     //Kullanici giriÅŸi kontrolÃ¼
     @Override
     public Kullanici girKontrol(Kullanici k) {
-        
+
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         String sorgu = "Select k from Kullanici k WHERE email = :email AND parola= :parola";
@@ -75,4 +75,17 @@ public class KullaniciDaoImpl implements KullaniciDao, Serializable {
 //        System.out.print(kullan);
 //        return kullan;
 //    }
+
+    @Override
+    public boolean kaydet(Kullanici k) {
+
+        session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.save(k.getOzbilgiID());
+        session.save(k);
+        tx.commit();
+        session.close();
+
+        return true;
+    }
 }

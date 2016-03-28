@@ -5,10 +5,17 @@
  */
 package com.eticaret.onlinecv.dao.Impl;
 
+import com.eticaret.onlinecv.dao.KullaniciDao;
+import com.eticaret.onlinecv.dao.KullaniciozbilgiDao;
+
+import java.io.Serializable;
+
 /**
  *
  * @author ali
  */
-public class KullaniciozbilgiDaoImpl {
+public class KullaniciozbilgiDaoImpl implements KullaniciozbilgiDao, Serializable{
+
+    
     
 }
