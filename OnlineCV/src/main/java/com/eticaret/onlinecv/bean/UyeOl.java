@@ -41,14 +41,12 @@ public class UyeOl implements Serializable{
     public void init() {
         
     }
-
-    
     
     
     public String kaydet(){
        kullanici.setOzbilgiID(kozbilgi);
        kullaniciDao.kaydet(kullanici);
-       return navigationBean.redirectIndex();
+       return navigationBean.redirectKLogin();
     }
 
     public Kullaniciozbilgi getKozbilgi() {
