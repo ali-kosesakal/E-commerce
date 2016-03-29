@@ -34,6 +34,10 @@ public class NavigationBean implements Serializable{
    public String redirectKLogin() {
       return "/kullanici/giris?faces-redirect=true";
    }
+   
+   public String toKLogin(){
+       return "/kullanici/giris.xhtml";
+   }
 
    public String redirectSLogin() {
       return "/sirket/giris?faces-redirect=true";
@@ -42,6 +46,10 @@ public class NavigationBean implements Serializable{
     public String redirectKullaniciProfil() {
       return "/kullanici/profil?faces-redirect=true";
    }
+    
+    public String toKProfil(){
+        return "/kullanici/profil.xhtml";
+    }
     
     public String redirectSirketProfil() {
       return "/sirket/profil?faces-redirect=true";

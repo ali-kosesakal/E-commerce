@@ -53,28 +53,6 @@ public class KullaniciDaoImpl implements KullaniciDao, Serializable {
             return null;
         }
     }
-//
-//    public void save(Kullanici user) {
-//        session.beginTransaction();
-//        session.save(user);
-//        session.getTransaction().commit();
-//        session.close();
-//    }
-//
-//    public Integer getId() {
-//        String hql = "select count(kullaniciID) from kullanici k";
-//        Query query = session.createQuery(hql);
-//        List<Integer> results = new ArrayList<>();
-//
-//        results = query.list();
-//        Integer kullan = 1;
-//        if (results.get(0) != null) {
-//            System.out.print(kullan);
-//            kullan = results.get(0) + 1;
-//        }
-//        System.out.print(kullan);
-//        return kullan;
-//    }
 
     @Override
     public boolean kaydet(Kullanici k) {
@@ -87,5 +65,21 @@ public class KullaniciDaoImpl implements KullaniciDao, Serializable {
         session.close();
 
         return true;
+    }
+
+    @Override
+    public boolean guncelle(Kullanici k) {
+
+        session = HibernateUtil.getSessionFactory().openSession();
+       
+            System.out.println("girdi");
+            tx = session.beginTransaction();
+            session.update(k.getOzbilgiID());
+            session.update(k);
+            tx.commit();
+            session.close();
+            System.out.println("Kaydetmiş olması lazım :D ");
+            return true;     
+
     }
 }

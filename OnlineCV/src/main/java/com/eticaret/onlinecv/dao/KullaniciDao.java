@@ -17,4 +17,5 @@ public interface KullaniciDao {
     
     public boolean kaydet(Kullanici k);
     
+    public boolean guncelle(Kullanici k);
 }

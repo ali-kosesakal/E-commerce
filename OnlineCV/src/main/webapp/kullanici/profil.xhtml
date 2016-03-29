@@ -6,13 +6,86 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Profil Sayfası</title>
     </h:head>
     <h:body>
         Hoşgeldin 
         <h:form>
-        <p:outputLabel value="#{loginBean.k.ozbilgiID.ad} #{loginBean.k.ozbilgiID.soyad}" />
-        <p:commandButton value="Çıkış"    action="#{loginBean.logout}"/>
+            <p:outputLabel value="#{loginBean.k.ozbilgiID.ad} #{loginBean.k.ozbilgiID.soyad}  " />
+            <p:commandButton value="  Çıkış"    action="#{loginBean.logout}"/>
+        </h:form>
+        <h:form id="form">
+            <p:panel header="Kişisel Bilgiler">
+
+
+                <h:panelGrid id="grid" columns="2" cellpadding="5">
+                    <p:outputLabel  value="Adres:" style="font-weight:bold"/>                    
+                    <p:outputLabel  value="#{loginBean.k.ozbilgiID.adres}" style="font-weight:bold"/>                         
+
+                    <p:outputLabel  value="Telefon:" style="font-weight:bold"/>                    
+                    <p:outputLabel  value="#{loginBean.k.ozbilgiID.tel}" style="font-weight:bold"/>                         
+
+                    <p:outputLabel  value="Dogum Tarihi:" style="font-weight:bold"/>                    
+                    <p:outputLabel  value="#{loginBean.k.ozbilgiID.dtarihi}" style="font-weight:bold"/>                         
+
+                    <p:outputLabel  value="Açıklama:" style="font-weight:bold"/>                    
+                    <p:outputLabel  value="#{loginBean.k.ozbilgiID.aciklama}" style="font-weight:bold"/>                         
+
+                </h:panelGrid>
+
+                <p:commandButton value="Düzenle" icon="ui-icon-extlink" oncomplete="PF('servisDialog').show()"  />
+
+            </p:panel>
+            
+            <h:form>
+                <p:dialog styleClass="dialog" header="Kişisel Bilgilerini Güncelle" widgetVar="servisDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:outputPanel id="servisDetay" styleClass="opanel" style="font-size: 20px !important;">
+                        <h:panelGrid  columns="2"  columnClasses="label,value" styleClass="gpanel" cellpadding="5" >
+                            <p:outputLabel value="Adres :"/>
+                            <p:inputTextarea  value="#{guncelleKullanici.guncelozbilgi.adres}" style="font-weight:bold"/>
+                            <p:outputLabel  value="Telefon:" style="font-weight:bold"/>                    
+                            <p:inputMask  value="#{guncelleKullanici.guncelozbilgi.tel}" mask="(999) 999-9999"/>                    
+                            <p:outputLabel  value="Dogum Tarihi:" style="font-weight:bold"/>                    
+                            <p:inputMask  value="#{guncelleKullanici.guncelozbilgi.dtarihi}" mask="9999/99/99"/>
+                            <p:outputLabel  value="Açıklama:" style="font-weight:bold"/>                    
+                            <p:inputTextarea  value="#{guncelleKullanici.guncelozbilgi.aciklama}" style="font-weight:bold"/> 
+                        </h:panelGrid>
+                        <p:commandButton value="Güncelle"  action="#{guncelleKullanici.update}" oncomplete="PF('servisDialog').hide()"/>
+                    </p:outputPanel>
+                </p:dialog>
+            </h:form>
+            
+            <p:panel header="Eğitim Bilgileri">
+
+
+                <h:panelGrid id="grid2" columns="2" cellpadding="5">
+                    <p:outputLabel  value="Üniversite:" style="font-weight:bold"/>                    
+                    <p:outputLabel  value="#{loginBean.k.ozbilgiID.universiteID.okuladi}" style="font-weight:bold"/>                         
+
+                    <p:outputLabel  value="Üniversite Başlama Tarihi:" style="font-weight:bold"/>                    
+                    <h:outputText   value="#{loginBean.k.ozbilgiID.unibastarihi}" style="font-weight:bold">                         
+                        <f:convertDateTime pattern="yyyy" /></h:outputText>
+
+                    <p:outputLabel  value="Genel Not Ortalaması:" style="font-weight:bold"/>                    
+                    <h:outputText  value="#{loginBean.k.ozbilgiID.agno}" style="font-weight:bold"/>                         
+
+                    <p:outputLabel value="Lise :" style="font-weight:bold"/>                    
+                    <h:outputText  value="#{loginBean.k.ozbilgiID.lise}" style="font-weight:bold"/>
+
+
+
+                    <p:outputLabel   value="Lise Başlama Tarihi:" style="font-weight:bold"/>                    
+                    <h:outputText   value="#{loginBean.k.ozbilgiID.lisebastarihi}" style="font-weight:bold">
+                        <f:convertDateTime pattern="yyyy" /></h:outputText>
+
+                    <p:outputLabel  value="Lise Bitiş Tarihi :" style="font-weight:bold"/>                    
+                    <h:outputText  value="#{loginBean.k.ozbilgiID.lisebittarihi}" style="font-weight:bold">
+                        <f:convertDateTime pattern="yyyy" /></h:outputText>
+
+                </h:panelGrid>
+
+
+            </p:panel>
         </h:form>
     </h:body>
 </html>
