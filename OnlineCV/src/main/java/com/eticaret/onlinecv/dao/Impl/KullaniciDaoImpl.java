@@ -11,6 +11,7 @@ import com.eticaret.onlinecv.entity.Kullanici;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -68,18 +69,19 @@ public class KullaniciDaoImpl implements KullaniciDao, Serializable {
     }
 
     @Override
-    public boolean guncelle(Kullanici k) {
+    @Transactional
+    public void guncelle(Kullanici k) {
 
         session = HibernateUtil.getSessionFactory().openSession();
-       
-            System.out.println("girdi");
-            tx = session.beginTransaction();
-            session.update(k.getOzbilgiID());
-            session.update(k);
-            tx.commit();
-            session.close();
-            System.out.println("Kaydetmiş olması lazım :D ");
-            return true;     
+
+        System.out.println("girdi");
+        tx = session.beginTransaction();
+        session.update(k.getOzbilgiID());
+        session.update(k);
+        session.refresh(k);
+        tx.commit();
+        session.close();
+        System.out.println("Kaydetmiş olması lazım :D ");
 
     }
 }

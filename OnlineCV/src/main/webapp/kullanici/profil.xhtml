@@ -33,28 +33,31 @@
 
                 </h:panelGrid>
 
-                <p:commandButton value="Düzenle" icon="ui-icon-extlink" oncomplete="PF('servisDialog').show()"  />
+                <p:commandButton value="Düzenle" icon="ui-icon-extlink" oncomplete="PF('kulGuncelle').show()"  />
 
             </p:panel>
-            
-            <h:form>
-                <p:dialog styleClass="dialog" header="Kişisel Bilgilerini Güncelle" widgetVar="servisDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
-                    <p:outputPanel id="servisDetay" styleClass="opanel" style="font-size: 20px !important;">
-                        <h:panelGrid  columns="2"  columnClasses="label,value" styleClass="gpanel" cellpadding="5" >
-                            <p:outputLabel value="Adres :"/>
-                            <p:inputTextarea  value="#{guncelleKullanici.guncelozbilgi.adres}" style="font-weight:bold"/>
-                            <p:outputLabel  value="Telefon:" style="font-weight:bold"/>                    
-                            <p:inputMask  value="#{guncelleKullanici.guncelozbilgi.tel}" mask="(999) 999-9999"/>                    
-                            <p:outputLabel  value="Dogum Tarihi:" style="font-weight:bold"/>                    
-                            <p:inputMask  value="#{guncelleKullanici.guncelozbilgi.dtarihi}" mask="9999/99/99"/>
-                            <p:outputLabel  value="Açıklama:" style="font-weight:bold"/>                    
-                            <p:inputTextarea  value="#{guncelleKullanici.guncelozbilgi.aciklama}" style="font-weight:bold"/> 
-                        </h:panelGrid>
-                        <p:commandButton value="Güncelle"  action="#{guncelleKullanici.update}" oncomplete="PF('servisDialog').hide()"/>
-                    </p:outputPanel>
-                </p:dialog>
-            </h:form>
-            
+        </h:form>
+
+        <p:dialog styleClass="dialog" header="Kişisel Bilgilerini Güncelle" widgetVar="kulGuncelle" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+            <h:form id="dialogform">
+                <p:outputPanel id="kulDetay" styleClass="opanel" style="font-size: 12px !important;">
+                    <h:panelGrid  columns="2"  columnClasses="label,value" styleClass="gpanel" cellpadding="5" >
+                        <p:outputLabel value="Adres :" style="font-weight:bold"/>
+                        <p:inputTextarea  value="#{guncelleBean.guncelozbilgi.adres}" />
+                        <p:outputLabel  value="Telefon:" style="font-weight:bold"/>                    
+                        <p:inputMask  value="#{guncelleBean.guncelozbilgi.tel}" mask="(999) 999-9999"/>                    
+                        <p:outputLabel  value="Dogum Tarihi:" style="font-weight:bold"/>                    
+                        <p:inputMask  value="#{guncelleBean.guncelozbilgi.dtarihi}" mask="9999/99/99"/>
+                        <p:outputLabel  value="Açıklama:" style="font-weight:bold"/>                    
+                        <p:inputTextarea  value="#{guncelleBean.guncelozbilgi.aciklama}" /> 
+                    </h:panelGrid>
+                </p:outputPanel>
+            </h:form>          
+            <p:commandButton value="Güncelle"   action="#{guncelleBean.update}" update=":form:grid" oncomplete="PF('kulGuncelle').hide()"/>
+        </p:dialog>
+
+
+        <h:form id="form2">
             <p:panel header="Eğitim Bilgileri">
 
 

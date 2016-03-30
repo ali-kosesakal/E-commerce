@@ -11,22 +11,26 @@ import com.eticaret.onlinecv.dao.KullaniciDao;
 import com.eticaret.onlinecv.dao.KullaniciozbilgiDao;
 import com.eticaret.onlinecv.entity.Kullanici;
 import com.eticaret.onlinecv.entity.Kullaniciozbilgi;
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author esref
  */
-@ManagedBean(name = "guncelleKullanici")
+@ManagedBean(name = "guncelleBean")
 @ViewScoped
-public class GuncelleKullanici {
+public class GuncelleBean implements Serializable{
 
     NavigationBean navigationBean = new NavigationBean();
-
+    
+    
+    @ManagedProperty("#{loginBean}")
+    private LoginBean loku= new LoginBean();
+    
     KullaniciozbilgiDao kullaniciOzDao = new KullaniciozbilgiDaoImpl();
 
     KullaniciDao kullaniciDao = new KullaniciDaoImpl();
@@ -34,22 +38,23 @@ public class GuncelleKullanici {
     Kullanici guncelk = new Kullanici();
 
     Kullaniciozbilgi guncelozbilgi = new Kullaniciozbilgi();
+    
+    Kullaniciozbilgi guncelozbilgi2 = new Kullaniciozbilgi();
 
     /**
      * Creates a new instance of GuncelleKullanici
      */
     @PostConstruct
     public void init() {
-        LoginBean k = new LoginBean();
-        guncelozbilgi = k.k.getOzbilgiID();
+                guncelozbilgi = loku.k.getOzbilgiID();       
     }
 
-    public String update() {
+    public void update() {
+        System.out.println("update girdi"); 
+        System.out.println(guncelozbilgi.getAdres());
+        System.out.println(guncelozbilgi.getAciklama());
+        kullaniciOzDao.guncelle(guncelozbilgi);
         
-        guncelk.setOzbilgiID(guncelozbilgi);
-        kullaniciDao.guncelle(guncelk);
-        return navigationBean.redirectKullaniciProfil();
-
     }
 
     public Kullanici getGuncelk() {
@@ -68,4 +73,19 @@ public class GuncelleKullanici {
         this.guncelozbilgi = guncelozbilgi;
     }
 
+    public void setLoku(LoginBean loku) {
+        this.loku = loku;
+    }
+
+    public LoginBean getLoku() {
+        return loku;
+    }
+
+    public Kullaniciozbilgi getGuncelozbilgi2() {
+        return guncelozbilgi2;
+    }
+
+  
+    
+    
 }

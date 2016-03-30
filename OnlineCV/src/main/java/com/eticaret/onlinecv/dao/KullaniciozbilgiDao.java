@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package com.eticaret.onlinecv.dao;
-
+import  com.eticaret.onlinecv.entity.Kullaniciozbilgi;
 /**
  *
  * @author ali
  */
 public interface KullaniciozbilgiDao {
+    
+     public void guncelle(Kullaniciozbilgi k);
     
 }

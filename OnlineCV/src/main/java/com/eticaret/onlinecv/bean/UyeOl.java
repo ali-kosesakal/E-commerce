@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
@@ -39,6 +40,8 @@ public class UyeOl implements Serializable{
     Kullanici kullanici = new Kullanici();
     
     KullaniciDao kullaniciDao = new KullaniciDaoImpl();
+    
+   
 
     /**
      * Creates a new instance of UyeOl

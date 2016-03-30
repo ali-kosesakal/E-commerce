@@ -42,7 +42,8 @@ public class LoginBean implements Serializable {
     @PostConstruct
 
     public void init() {
-        System.out.println("calisti");
+        System.out.println("loginbean calisti");
+       
     }
 
     public String girisKontrol() {
