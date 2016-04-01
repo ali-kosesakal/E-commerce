@@ -12,15 +12,9 @@ import com.eticaret.onlinecv.dao.KullaniciozbilgiDao;
 import com.eticaret.onlinecv.entity.Kullanici;
 import com.eticaret.onlinecv.entity.Kullaniciozbilgi;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
+
 
 /**
  *
@@ -28,7 +22,7 @@ import org.primefaces.event.SelectEvent;
  */
 @ManagedBean(name = "uyeOl")
 @ViewScoped
-public class UyeOl implements Serializable{
+public class KullaniciBean implements Serializable{
      private static final long serialVersionUID = 1L;
     
     NavigationBean navigationBean = new NavigationBean();

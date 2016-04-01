@@ -5,10 +5,16 @@
  */
 package com.eticaret.onlinecv.dao;
 
+import com.eticaret.onlinecv.entity.Universite;
+import java.util.List;
+
 /**
  *
  * @author ali
  */
 public interface UniversiteDao {
-    
+
+    public List<Universite> getirUniversiteList();
+
+    public Universite getirUniversite(Integer id);
 }

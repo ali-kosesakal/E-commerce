@@ -19,25 +19,36 @@ import org.hibernate.Transaction;
  *
  * @author ali
  */
-public class KullaniciozbilgiDaoImpl implements KullaniciozbilgiDao, Serializable{
+public class KullaniciozbilgiDaoImpl implements KullaniciozbilgiDao, Serializable {
 
-     SessionFactory sessionFactory;
+    SessionFactory sessionFactory;
 
     Session session = null;
     Transaction tx = null;
-    
+
     @Override
     public void guncelle(Kullaniciozbilgi k) {
         session = HibernateUtil.getSessionFactory().openSession();
         System.out.println("güncell adres: " + k.getAdres());
         System.out.println("girdi");
+        System.out.println("                -"+k.getTel());
         tx = session.beginTransaction();
-        session.saveOrUpdate(k);
-        tx.commit();
-        session.close();
-        System.out.println("Kaydetmiş olması lazım :D ");
-        }
 
-    
-    
+        Kullaniciozbilgi ozbilgi = (Kullaniciozbilgi) session.get(Kullaniciozbilgi.class, k.getOzbilgiID());
+
+        tx.commit();
+
+        session.close();
+
+        ozbilgi = k;
+
+        Session session2 = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx2 = session2.beginTransaction();
+        session2.merge(ozbilgi);
+        tx2.commit();
+        session2.close();
+
+        System.out.println("Kaydetmiş olması lazım :D ");
+    }
+
 }

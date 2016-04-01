@@ -13,6 +13,7 @@ import com.eticaret.onlinecv.entity.Kullanici;
 import com.eticaret.onlinecv.entity.Sirket;
 import java.io.Serializable;
 
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
@@ -36,9 +37,7 @@ public class LoginBean implements Serializable {
     Sirket s = new Sirket();
     Kullanici k = new Kullanici();
     
- 
     
-
     @PostConstruct
 
     public void init() {

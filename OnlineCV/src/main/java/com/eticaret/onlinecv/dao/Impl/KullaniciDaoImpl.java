@@ -8,6 +8,7 @@ package com.eticaret.onlinecv.dao.Impl;
 import com.eticaret.onlinecv.bean.HibernateUtil;
 import com.eticaret.onlinecv.dao.KullaniciDao;
 import com.eticaret.onlinecv.entity.Kullanici;
+import com.eticaret.onlinecv.entity.Kullaniciozbilgi;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,11 +77,17 @@ public class KullaniciDaoImpl implements KullaniciDao, Serializable {
 
         System.out.println("girdi");
         tx = session.beginTransaction();
-        session.update(k.getOzbilgiID());
-        session.update(k);
-        session.refresh(k);
+        
+
+        Kullanici kullanici = (Kullanici) session.get(Kullanici.class, k.getKullaniciID());
+
+        Kullaniciozbilgi ozbilgi = (Kullaniciozbilgi) session.get(Kullaniciozbilgi.class, k.getOzbilgiID());   
+       
+        session.update(kullanici);
+        session.update(ozbilgi);
         tx.commit();
         session.close();
+     
         System.out.println("Kaydetmiş olması lazım :D ");
 
     }

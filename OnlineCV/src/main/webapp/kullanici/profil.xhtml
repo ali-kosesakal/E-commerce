@@ -4,91 +4,150 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
     <h:head>
         <title>Profil Sayfası</title>
     </h:head>
     <h:body>
         Hoşgeldin 
-        <h:form>
+        <h:form id="giris">
             <p:outputLabel value="#{loginBean.k.ozbilgiID.ad} #{loginBean.k.ozbilgiID.soyad}  " />
-            <p:commandButton value="  Çıkış"    action="#{loginBean.logout}"/>
-        </h:form>
-        <h:form id="form">
+
+            <p:commandButton id="logout" process="@this" value="  Çıkış"    action="#{loginBean.logout}"/>
+
             <p:panel header="Kişisel Bilgiler">
 
 
-                <h:panelGrid id="grid" columns="2" cellpadding="5">
-                    <p:outputLabel  value="Adres:" style="font-weight:bold"/>                    
-                    <p:outputLabel  value="#{loginBean.k.ozbilgiID.adres}" style="font-weight:bold"/>                         
+                <h:panelGrid id="kulbil" columns="2" cellpadding="5">
+                    <p:outputLabel for="adres" value="Adres:" style="font-weight:bold"/>                    
+                    <p:outputLabel  id="adres" value="#{loginBean.k.ozbilgiID.adres}" />                         
 
-                    <p:outputLabel  value="Telefon:" style="font-weight:bold"/>                    
-                    <p:outputLabel  value="#{loginBean.k.ozbilgiID.tel}" style="font-weight:bold"/>                         
+                    <p:outputLabel for="tel" value="Telefon:" style="font-weight:bold"/>                    
+                    <p:outputLabel id="tel" value="#{loginBean.k.ozbilgiID.tel}" />                         
 
-                    <p:outputLabel  value="Dogum Tarihi:" style="font-weight:bold"/>                    
-                    <p:outputLabel  value="#{loginBean.k.ozbilgiID.dtarihi}" style="font-weight:bold"/>                         
+                    <p:outputLabel for="dtarihi" value="Dogum Tarihi:" style="font-weight:bold"/>                    
+                    <h:outputLabel  id="dtarihi" value="#{loginBean.k.ozbilgiID.dtarihi}"  >
+                        <f:convertDateTime pattern="dd-MM-yyyy" />  
+                    </h:outputLabel>                         
 
-                    <p:outputLabel  value="Açıklama:" style="font-weight:bold"/>                    
-                    <p:outputLabel  value="#{loginBean.k.ozbilgiID.aciklama}" style="font-weight:bold"/>                         
+                    <p:outputLabel for="aciklama" value="Açıklama:" style="font-weight:bold"/>                    
+                    <p:outputLabel id="aciklama" value="#{loginBean.k.ozbilgiID.aciklama}" />                         
+
+                    <p:commandButton id="duzenle" value="Düzenle" process="@this" icon="ui-icon-extlink" update=":giris:kulBilGun"  oncomplete="PF('kulGuncelle').show()"  />
 
                 </h:panelGrid>
 
-                <p:commandButton value="Düzenle" icon="ui-icon-extlink" oncomplete="PF('kulGuncelle').show()"  />
 
             </p:panel>
-        </h:form>
 
-        <p:dialog styleClass="dialog" header="Kişisel Bilgilerini Güncelle" widgetVar="kulGuncelle" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
-            <h:form id="dialogform">
-                <p:outputPanel id="kulDetay" styleClass="opanel" style="font-size: 12px !important;">
+            <p:dialog styleClass="dialog" header="Kişisel Bilgilerini Güncelle" widgetVar="kulGuncelle" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="kulBilGun" styleClass="opanel" style="font-size: 12px !important;">
                     <h:panelGrid  columns="2"  columnClasses="label,value" styleClass="gpanel" cellpadding="5" >
-                        <p:outputLabel value="Adres :" style="font-weight:bold"/>
-                        <p:inputTextarea  value="#{guncelleBean.guncelozbilgi.adres}" />
-                        <p:outputLabel  value="Telefon:" style="font-weight:bold"/>                    
-                        <p:inputMask  value="#{guncelleBean.guncelozbilgi.tel}" mask="(999) 999-9999"/>                    
-                        <p:outputLabel  value="Dogum Tarihi:" style="font-weight:bold"/>                    
-                        <p:inputMask  value="#{guncelleBean.guncelozbilgi.dtarihi}" mask="9999/99/99"/>
-                        <p:outputLabel  value="Açıklama:" style="font-weight:bold"/>                    
-                        <p:inputTextarea  value="#{guncelleBean.guncelozbilgi.aciklama}" /> 
+                        <p:outputLabel for="adresd" value="Adres :" style="font-weight:bold"/>
+                        <p:inputTextarea id="adresd" value="#{guncelleBean.guncelozbilgi.adres}" />
+
+                        <p:outputLabel for="teld" value="Telefon:" style="font-weight:bold" />                    
+                        <p:inputText  id="teld" value="#{guncelleBean.guncelozbilgi.tel}"  maxlength="10" >
+                            <pe:keyFilter regEx="/[\d\-]/"/>
+                        </p:inputText>
+
+                        <p:outputLabel for="dtarihid" value="Doğum Tarihi" style="font-weight:bold"/>  
+                        <p:calendar id="dtarihid" value="#{guncelleBean.guncelozbilgi.dtarihi}"  navigator="true"  pattern="dd-MM-yyyy"  timeZone="UTC"/>
+
+                        <p:outputLabel for="aciklamad" value="Açıklama:" style="font-weight:bold"/>                    
+                        <p:inputTextarea id="aciklamad" value="#{guncelleBean.guncelozbilgi.aciklama}" /> 
+
+
+                        <p:commandButton id="update" value="Güncelle"  action="#{guncelleBean.update}" update=":giris:kulbil" oncomplete="PF('kulGuncelle').hide()" />
+
                     </h:panelGrid>
                 </p:outputPanel>
-            </h:form>          
-            <p:commandButton value="Güncelle"   action="#{guncelleBean.update}" update=":form:grid" oncomplete="PF('kulGuncelle').hide()"/>
-        </p:dialog>
+
+            </p:dialog>
 
 
-        <h:form id="form2">
             <p:panel header="Eğitim Bilgileri">
 
 
-                <h:panelGrid id="grid2" columns="2" cellpadding="5">
-                    <p:outputLabel  value="Üniversite:" style="font-weight:bold"/>                    
-                    <p:outputLabel  value="#{loginBean.k.ozbilgiID.universiteID.okuladi}" style="font-weight:bold"/>                         
+                <h:panelGrid id="egitimbil" columns="2" cellpadding="5">
+                    <p:outputLabel for="universite" value="Üniversite:" style="font-weight:bold"/>                    
+                    <p:outputLabel id="universite" value="#{loginBean.k.ozbilgiID.universiteID.okuladi}" />                         
 
-                    <p:outputLabel  value="Üniversite Başlama Tarihi:" style="font-weight:bold"/>                    
-                    <h:outputText   value="#{loginBean.k.ozbilgiID.unibastarihi}" style="font-weight:bold">                         
+                    <p:outputLabel for="unibastarihi" value="Üniversite Başlama Tarihi:" style="font-weight:bold"/>                    
+                    <h:outputText  id="unibastarihi" value="#{loginBean.k.ozbilgiID.unibastarihi}" >                         
                         <f:convertDateTime pattern="yyyy" /></h:outputText>
 
-                    <p:outputLabel  value="Genel Not Ortalaması:" style="font-weight:bold"/>                    
-                    <h:outputText  value="#{loginBean.k.ozbilgiID.agno}" style="font-weight:bold"/>                         
+                    <p:outputLabel for="gno" value="Genel Not Ortalaması:" style="font-weight:bold"/>                    
+                    <h:outputText  id="gno" value="#{loginBean.k.ozbilgiID.agno}" />                         
 
-                    <p:outputLabel value="Lise :" style="font-weight:bold"/>                    
-                    <h:outputText  value="#{loginBean.k.ozbilgiID.lise}" style="font-weight:bold"/>
+                    <p:outputLabel for="lise" value="Lise :" style="font-weight:bold"/>                    
+                    <h:outputText id="lise" value="#{loginBean.k.ozbilgiID.lise}" />
 
-
-
-                    <p:outputLabel   value="Lise Başlama Tarihi:" style="font-weight:bold"/>                    
-                    <h:outputText   value="#{loginBean.k.ozbilgiID.lisebastarihi}" style="font-weight:bold">
+                    <p:outputLabel for="lisebastarihi"  value="Lise Başlama Tarihi:" style="font-weight:bold"/>                    
+                    <h:outputText  id="lisebastarihi" value="#{loginBean.k.ozbilgiID.lisebastarihi}" >
                         <f:convertDateTime pattern="yyyy" /></h:outputText>
 
-                    <p:outputLabel  value="Lise Bitiş Tarihi :" style="font-weight:bold"/>                    
-                    <h:outputText  value="#{loginBean.k.ozbilgiID.lisebittarihi}" style="font-weight:bold">
+                    <p:outputLabel for="lisebittarihi" value="Lise Bitiş Tarihi :" style="font-weight:bold"/>                    
+                    <h:outputText  id="lisebittarihi" value="#{loginBean.k.ozbilgiID.lisebittarihi}" >
                         <f:convertDateTime pattern="yyyy" /></h:outputText>
+
+                    <p:commandButton id="duzenle2" value="Düzenle" process="@this" icon="ui-icon-extlink"  update=":giris:kulEgiGun" oncomplete="PF('egitimBilGuncelle').show()"  />
+
 
                 </h:panelGrid>
 
 
             </p:panel>
+
+            <p:dialog  header="Eğitim Bilgilerini Güncelle" widgetVar="egitimBilGuncelle" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="kulEgiGun" styleClass="opanel" style="font-size: 12px !important;">
+                    <h:panelGrid  columns="2"  columnClasses="label,value" styleClass="gpanel" cellpadding="5" >
+                        <p:outputLabel for="unid" value="Üniversite :" style="font-weight:bold"/>                        
+                        <p:selectOneMenu id="unid" value="#{guncelleBean.guncelUniId}">
+                            <f:selectItems value="#{guncelleBean.universiteListe}" var="universite" itemValue="#{universite.universiteID}" itemLabel="#{universite.okuladi}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="unibastarihid" value="Üniversite Başlama Tarihi :" style="font-weight:bold" />                    
+                        <p:calendar id="unibastarihid" value="#{guncelleBean.guncelozbilgi.unibastarihi}"  yearRange="c-50:c+50"  navigator="true"  pattern="yyyy" timeZone="UTC"/>
+
+                        <p:outputLabel for="gnod" value="Genel Not Ortalaması :" style="font-weight:bold"/>  
+                        <p:inputText  id="gnod" value="#{guncelleBean.guncelozbilgi.agno}"  maxlength="4" >
+                            <pe:keyFilter regEx="/[\d\-\.]/"/>
+                        </p:inputText>
+
+                        <p:outputLabel for="lised" value="Lise :" style="font-weight:bold"/>                    
+                        <p:inputText  id="lised" value="#{guncelleBean.guncelozbilgi.lise}"  />
+
+                        <p:outputLabel for="lisebastarihid" value="Lise Başlama Tarihi :" style="font-weight:bold"/>                    
+                        <p:calendar id="lisebastarihid" value="#{guncelleBean.guncelozbilgi.lisebastarihi}"  yearRange="c-50:c+50"  navigator="true"  pattern="yyyy" timeZone="UTC"/>
+
+                        <p:outputLabel for="lisebitistarihid" value="Lise Bitiş Tarihi :" style="font-weight:bold"/>                    
+                        <p:calendar id="lisebitistarihid" value="#{guncelleBean.guncelozbilgi.lisebittarihi}"  yearRange="c-50:c+50"  navigator="true"  pattern="yyyy"   timeZone="UTC"/>
+
+                        <p:commandButton id="update2" value="Güncelle"   action="#{guncelleBean.update}" update=":giris:egitimbil" oncomplete="PF('egitimBilGuncelle').hide()" />
+
+                    </h:panelGrid>
+                </p:outputPanel>
+
+            </p:dialog>
+
+            <p:tabView value="#{guncelleBean.projelist}" var="proje">
+                <p:tab title=" #{proje.projeadi}">
+                    <h:panelGrid columns="2" cellpadding="5">
+                                           
+                        <h:outputText value="Proje Açıklama :" style="font-weight: bold"/>
+                        <h:outputText value="#{proje.aciklama}" />
+
+                        <h:outputText value="Teknolojiler :" style="font-weight: bold"/>
+                        <h:outputText  />
+
+                        <h:outputText value="Color:" style="font-weight: bold"/>
+                        <h:outputText />
+                    </h:panelGrid>
+                </p:tab>
+            </p:tabView>
+
         </h:form>
     </h:body>
 </html>
