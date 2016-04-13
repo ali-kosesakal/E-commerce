@@ -2,25 +2,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Üye Ol</title>
     </h:head>
     <h:body>
-        <h:form>
-            <p:outputLabel for="s_email" value="Email"/>
-            <p:inputText id="s_email"  required="true"/>
-            <br/>
-            <p:outputLabel for="sparola1" value="Parola"/>
-            <p:password id="sparola1"   required="true"/>
-            <br/>
-            <p:outputLabel for="sparola1" value="Parola Tekrar"/>
-            <p:password id="sparola1"    required="true"/>
-            <br/>
-            <br/>
-            <p:commandButton value="Kaydı Tamamla"  />
+         <h:form>
+            <p:messages id="messages" showDetail="false" autoUpdate="true"  />
+
+            <h:panelGrid columns="2" id="matchGrid" cellpadding="5"> 
+                <p:outputLabel for="k_ad" value="Şirket Adı"/>
+                <p:inputText id="k_ad"  value="#{sirketUyeOl.sirketozbilgi.sirketadi}" requiredMessage="Şirket Adını Giriniz"  required="true"/>
+                <p:outputLabel for="k_soyad" value="Web Adresi"/>
+                <p:inputText id="k_soyad" value="#{sirketUyeOl.sirketozbilgi.webadres}" requiredMessage="Web Adresi Giriniz"  required="true"/>
+                <p:outputLabel for="k_email" value="Email"/>
+                <p:inputText id="k_email" value="#{sirketUyeOl.sirket.email}" requiredMessage="Email Giriniz" required="true"/>
+                <p:outputLabel for="pwd1" value="Parola : *" />
+                <p:password id="pwd1" value="#{sirketUyeOl.sirket.parola}" validatorMessage="Şifreler Eşleşmiyor" match="pwd2" label="Parola" required="true" />
+                <p:outputLabel for="pwd2" value="Parola Tekrar : *" />
+                <p:password id="pwd2" value="#{sirketUyeOl.sirket.parola}" label="Parola Tekrar" required="true" />
+            </h:panelGrid>
+            <p:commandButton value="Kaydı Tamamla"  action="#{sirketUyeOl.kaydet}"/>
         </h:form>
     </h:body>
 </html>

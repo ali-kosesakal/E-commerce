@@ -5,14 +5,10 @@
  */
 package com.eticaret.onlinecv.dao;
 
-import com.eticaret.onlinecv.entity.Sirket;
-
 /**
  *
  * @author ali
  */
-public interface SirketDao {
-    public Sirket girsKontrol(Sirket s) ;
-    public boolean kaydet(Sirket s);
-    public void guncelle(Sirket s);
+public interface KullaniciprojeDao {
+    
 }

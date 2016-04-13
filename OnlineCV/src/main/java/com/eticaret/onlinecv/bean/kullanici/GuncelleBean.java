@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.eticaret.onlinecv.bean;
+package com.eticaret.onlinecv.bean.kullanici;
 
+import com.eticaret.onlinecv.bean.LoginBean;
+import com.eticaret.onlinecv.bean.LoginBean;
+import com.eticaret.onlinecv.bean.NavigationBean;
+import com.eticaret.onlinecv.bean.NavigationBean;
 import com.eticaret.onlinecv.dao.Impl.KullaniciDaoImpl;
 import com.eticaret.onlinecv.dao.Impl.KullaniciozbilgiDaoImpl;
 import com.eticaret.onlinecv.dao.Impl.ProjeDaoImpl;
@@ -38,7 +42,6 @@ public class GuncelleBean implements Serializable {
     
     NavigationBean navigationBean = new NavigationBean();
     
-    @ManagedProperty("#{loginBean}")
     private LoginBean loku = new LoginBean();
     
     KullaniciozbilgiDao kullaniciOzDao = new KullaniciozbilgiDaoImpl();
@@ -74,9 +77,11 @@ public class GuncelleBean implements Serializable {
      */
     @PostConstruct
     public void init() {
-        guncelozbilgi = loku.k.getOzbilgiID();
+        guncelozbilgi = loku.getK().getOzbilgiID();
         universiteListe = uniDao.getirUniversiteList();
-        projelist = projeDao.getirProjeList();
+        System.out.println(guncelozbilgi.getAciklama());
+        System.out.println(guncelozbilgi.getAgno());
+       // projelist = projeDao.getirProjeList();
        // kulProjeList = guncelk.getKullaniciprojeList();
     }
     

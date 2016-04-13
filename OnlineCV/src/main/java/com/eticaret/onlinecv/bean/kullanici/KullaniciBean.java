@@ -1,10 +1,13 @@
+package com.eticaret.onlinecv.bean.kullanici;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.eticaret.onlinecv.bean;
 
+import com.eticaret.onlinecv.bean.NavigationBean;
+import com.eticaret.onlinecv.bean.NavigationBean;
 import com.eticaret.onlinecv.dao.Impl.KullaniciDaoImpl;
 import com.eticaret.onlinecv.dao.Impl.KullaniciozbilgiDaoImpl;
 import com.eticaret.onlinecv.dao.KullaniciDao;
@@ -37,9 +40,7 @@ public class KullaniciBean implements Serializable{
     
    
 
-    /**
-     * Creates a new instance of UyeOl
-     */
+   
     public void init() {
         
     }

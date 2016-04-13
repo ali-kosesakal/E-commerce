@@ -10,8 +10,6 @@ import com.eticaret.onlinecv.dao.KullaniciDao;
 import com.eticaret.onlinecv.entity.Kullanici;
 import com.eticaret.onlinecv.entity.Kullaniciozbilgi;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;

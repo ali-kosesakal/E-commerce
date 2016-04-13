@@ -71,6 +71,7 @@ public class LoginBean implements Serializable {
         Sirket si = sirketDao.girsKontrol(s);
 
         if (si != null) {
+            s = si;
             return navigationBean.redirectSirketProfil();
         } else {
             System.out.println("giriÅŸ yanlÄ±ÅŸ");

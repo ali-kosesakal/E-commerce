@@ -7,7 +7,6 @@ package com.eticaret.onlinecv.bean;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.inject.Named;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -52,6 +51,6 @@ public class NavigationBean implements Serializable{
     }
     
     public String redirectSirketProfil() {
-      return "/sirket/profil?faces-redirect=true";
+      return "/sirket/sirketProfil?faces-redirect=true";
    }
 }

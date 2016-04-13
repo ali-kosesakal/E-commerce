@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author esref
+ * @author ali
  */
 @Entity
 @Table(name = "kullaniciozbilgi")
@@ -107,6 +107,9 @@ public class Kullaniciozbilgi implements Serializable {
     @JoinColumn(name = "universiteID", referencedColumnName = "universiteID")
     @ManyToOne
     private Universite universiteID;
+    @JoinColumn(name = "bolum_bolumID", referencedColumnName = "bolumID")
+    @ManyToOne
+    private Bolum bolumbolumID;
 
     public Kullaniciozbilgi() {
     }
@@ -248,6 +251,14 @@ public class Kullaniciozbilgi implements Serializable {
 
     public void setUniversiteID(Universite universiteID) {
         this.universiteID = universiteID;
+    }
+
+    public Bolum getBolumbolumID() {
+        return bolumbolumID;
+    }
+
+    public void setBolumbolumID(Bolum bolumbolumID) {
+        this.bolumbolumID = bolumbolumID;
     }
 
     @Override

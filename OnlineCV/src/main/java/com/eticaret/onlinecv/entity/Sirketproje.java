@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author esref
+ * @author ali
  */
 @Entity
 @Table(name = "sirketproje")

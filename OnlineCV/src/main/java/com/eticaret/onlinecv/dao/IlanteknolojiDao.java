@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.eticaret.onlinecv.dao.Impl;
+package com.eticaret.onlinecv.dao;
 
 /**
  *
  * @author ali
  */
-public class SirketProjeDaoImpl {
+public interface IlanteknolojiDao {
     
 }

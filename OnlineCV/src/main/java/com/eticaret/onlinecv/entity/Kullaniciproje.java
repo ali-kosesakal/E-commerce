@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author esref
+ * @author ali
  */
 @Entity
 @Table(name = "kullaniciproje")

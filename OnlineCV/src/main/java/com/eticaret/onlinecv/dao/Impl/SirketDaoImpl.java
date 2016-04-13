@@ -20,15 +20,14 @@ import org.hibernate.Transaction;
  * @author ali
  */
 public class SirketDaoImpl implements SirketDao, Serializable {
-
-    SessionFactory sessionFactory;
+    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     Session session = null;
     Transaction tx = null;
 
     @Override
     public Sirket girsKontrol(Sirket s) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = sessionFactory.openSession();
         session.beginTransaction();
         String sorgu = "Select s from Sirket s WHERE email = :email AND parola= :parola";
         System.out.println("    girisyap");
@@ -48,5 +47,31 @@ public class SirketDaoImpl implements SirketDao, Serializable {
             session.close();
             return null;
         }
+    }
+
+    @Override
+    public boolean kaydet(Sirket s) {
+         session = sessionFactory.openSession();
+        tx = session.beginTransaction();
+        session.save(s.getSirketbilgiID());
+        session.save(s);
+        tx.commit();
+        session.close();
+        return true;
+        
+    }
+
+    @Override
+    public void guncelle(Sirket s) {
+        System.out.println(s.getEmail());
+        System.out.println(s.getParola());
+        System.out.println(s.getSirketbilgiID().getSirketbilgiID());
+        session = sessionFactory.openSession();
+        tx = session.beginTransaction();
+        session.update(s);
+        tx.commit();
+        session.close();
+        System.out.println("guncelleme işlemi tamamlandı.....");
+        
     }
 }
