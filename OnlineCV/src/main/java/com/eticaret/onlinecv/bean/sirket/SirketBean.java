@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.eticaret.onlinecv.bean;
+package com.eticaret.onlinecv.bean.sirket;
 
+import com.eticaret.onlinecv.bean.NavigationBean;
 import com.eticaret.onlinecv.bean.NavigationBean;
 import com.eticaret.onlinecv.dao.Impl.SirketDaoImpl;
 import com.eticaret.onlinecv.dao.Impl.SirketozbilgiDaoImpl;
