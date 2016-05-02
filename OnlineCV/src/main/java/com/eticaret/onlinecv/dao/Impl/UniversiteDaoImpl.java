@@ -27,11 +27,11 @@ public class UniversiteDaoImpl implements UniversiteDao, Serializable {
 
      @Override
     public Universite getirUniversite(Integer id) {
-        session = HibernateUtil.getSessionFactory().openSession();
-      Universite uni = (Universite) session.get(Universite.class, id);
+         session = HibernateUtil.getSessionFactory().openSession();
+         Universite uni = (Universite) session.get(Universite.class, id);
 
-      session.close();
-      return uni;
+         session.close();
+         return uni;
 
    }
     @Override

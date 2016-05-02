@@ -18,8 +18,8 @@ import org.hibernate.Transaction;
  *
  * @author ali
  */
-public class ProjeDaoImpl implements ProjeDao, Serializable{
-    
+public class ProjeDaoImpl implements ProjeDao, Serializable {
+
     SessionFactory sessionFactory;
 
     Session session = null;
@@ -40,10 +40,44 @@ public class ProjeDaoImpl implements ProjeDao, Serializable{
     @Override
     public Proje getirProje(Integer id) {
         session = HibernateUtil.getSessionFactory().openSession();
-      Proje pro = (Proje) session.get(Proje.class, id);
+        Proje pro = (Proje) session.get(Proje.class, id);
 
-      session.close();
-      return pro;
-         }
-    
+        session.close();
+        return pro;
+    }
+
+    @Override
+    public void projeEkle(Proje p) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.save(p);
+        tx.commit();
+        session.close();
+    }
+
+    @Override
+    public void projeGuncelle(Proje p) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        System.out.println("güncell adres: " + p.getProjeadi());
+        System.out.println("girdi");
+        System.out.println("                -"+p.getAciklama());
+        tx = session.beginTransaction();
+
+        Proje proje = (Proje) session.get(Proje.class, p.getProjeID());
+
+        tx.commit();
+
+        session.close();
+
+        proje = p;
+
+        Session session2 = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx2 = session2.beginTransaction();
+        session2.merge(proje);
+        tx2.commit();
+        session2.close();
+
+        System.out.println("Kaydetmiş olması lazım :D ");
+    }
+
 }

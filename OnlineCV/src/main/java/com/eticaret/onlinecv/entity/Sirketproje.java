@@ -20,7 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -33,9 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Sirketproje.findAll", query = "SELECT s FROM Sirketproje s"),
-    @NamedQuery(name = "Sirketproje.findBySirketprojeID", query = "SELECT s FROM Sirketproje s WHERE s.sirketprojeID = :sirketprojeID"),
-    @NamedQuery(name = "Sirketproje.findByProjeadi", query = "SELECT s FROM Sirketproje s WHERE s.projeadi = :projeadi"),
-    @NamedQuery(name = "Sirketproje.findByAciklama", query = "SELECT s FROM Sirketproje s WHERE s.aciklama = :aciklama")})
+    @NamedQuery(name = "Sirketproje.findBySirketprojeID", query = "SELECT s FROM Sirketproje s WHERE s.sirketprojeID = :sirketprojeID")})
 public class Sirketproje implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,15 +41,12 @@ public class Sirketproje implements Serializable {
     @Basic(optional = false)
     @Column(name = "sirketprojeID")
     private Integer sirketprojeID;
-    @Size(max = 45)
-    @Column(name = "projeadi")
-    private String projeadi;
-    @Size(max = 45)
-    @Column(name = "aciklama")
-    private String aciklama;
     @JoinColumn(name = "sirketID", referencedColumnName = "sirketID")
     @ManyToOne(optional = false)
     private Sirket sirketID;
+    @JoinColumn(name = "projeID", referencedColumnName = "projeID")
+    @ManyToOne(optional = false)
+    private Proje projeID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sirketprojeID")
     private List<Sprojetek> sprojetekList;
 
@@ -71,28 +65,20 @@ public class Sirketproje implements Serializable {
         this.sirketprojeID = sirketprojeID;
     }
 
-    public String getProjeadi() {
-        return projeadi;
-    }
-
-    public void setProjeadi(String projeadi) {
-        this.projeadi = projeadi;
-    }
-
-    public String getAciklama() {
-        return aciklama;
-    }
-
-    public void setAciklama(String aciklama) {
-        this.aciklama = aciklama;
-    }
-
     public Sirket getSirketID() {
         return sirketID;
     }
 
     public void setSirketID(Sirket sirketID) {
         this.sirketID = sirketID;
+    }
+
+    public Proje getProjeID() {
+        return projeID;
+    }
+
+    public void setProjeID(Proje projeID) {
+        this.projeID = projeID;
     }
 
     @XmlTransient

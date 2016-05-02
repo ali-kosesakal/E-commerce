@@ -68,6 +68,8 @@ public class Ilan implements Serializable {
     private List<Basvuru> basvuruList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ilanID")
     private List<Ilanteknoloji> ilanteknolojiList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ilanID")
+    private List<Pozisyonilan> pozisyonilanList;
 
     public Ilan() {
     }
@@ -140,6 +142,15 @@ public class Ilan implements Serializable {
 
     public void setIlanteknolojiList(List<Ilanteknoloji> ilanteknolojiList) {
         this.ilanteknolojiList = ilanteknolojiList;
+    }
+
+    @XmlTransient
+    public List<Pozisyonilan> getPozisyonilanList() {
+        return pozisyonilanList;
+    }
+
+    public void setPozisyonilanList(List<Pozisyonilan> pozisyonilanList) {
+        this.pozisyonilanList = pozisyonilanList;
     }
 
     @Override

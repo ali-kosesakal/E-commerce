@@ -13,8 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -47,9 +45,6 @@ public class Universite implements Serializable {
     private String okuladi;
     @OneToMany(mappedBy = "universiteID")
     private List<Kullaniciozbilgi> kullaniciozbilgiList;
-    @JoinColumn(name = "bolumID", referencedColumnName = "bolumID")
-    @ManyToOne
-    private Bolum bolumID;
 
     public Universite() {
     }
@@ -81,14 +76,6 @@ public class Universite implements Serializable {
 
     public void setKullaniciozbilgiList(List<Kullaniciozbilgi> kullaniciozbilgiList) {
         this.kullaniciozbilgiList = kullaniciozbilgiList;
-    }
-
-    public Bolum getBolumID() {
-        return bolumID;
-    }
-
-    public void setBolumID(Bolum bolumID) {
-        this.bolumID = bolumID;
     }
 
     @Override

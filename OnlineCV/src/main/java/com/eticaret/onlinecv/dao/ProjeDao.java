@@ -7,7 +7,6 @@ package com.eticaret.onlinecv.dao;
 
 import com.eticaret.onlinecv.entity.Proje;
 import java.util.List;
-import com.eticaret.onlinecv.entity.Kullanici;
 
 /**
  *
@@ -19,4 +18,7 @@ public interface ProjeDao {
     
     public Proje getirProje(Integer id);
     
+    public void projeEkle(Proje p);
+    
+    public void projeGuncelle(Proje p);
 }

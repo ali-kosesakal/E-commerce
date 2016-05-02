@@ -21,6 +21,9 @@
     <class>com.eticaret.onlinecv.entity.Universite</class>
     <class>com.eticaret.onlinecv.entity.Teknoloji</class>
     <class>com.eticaret.onlinecv.entity.Sirketteknoloji</class>
+    <class>com.eticaret.onlinecv.entity.Sirketpozisyon</class>
+    <class>com.eticaret.onlinecv.entity.Pozisyonilan</class>
+    <class>com.eticaret.onlinecv.entity.Pozisyon</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/OnlineCV?zeroDateTimeBehavior=convertToNull"/>

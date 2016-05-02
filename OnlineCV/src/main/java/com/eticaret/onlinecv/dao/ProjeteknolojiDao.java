@@ -5,10 +5,16 @@
  */
 package com.eticaret.onlinecv.dao;
 
+import com.eticaret.onlinecv.entity.Proje;
+import com.eticaret.onlinecv.entity.Projeteknoloji;
+import java.util.List;
+
 /**
  *
  * @author ali
  */
 public interface ProjeteknolojiDao {
+    
+        
     
 }

@@ -43,8 +43,8 @@ public class Bolum implements Serializable {
     @Size(max = 45)
     @Column(name = "bolumadi")
     private String bolumadi;
-    @OneToMany(mappedBy = "bolumID")
-    private List<Universite> universiteList;
+    @OneToMany(mappedBy = "bolumbolumID")
+    private List<Kullaniciozbilgi> kullaniciozbilgiList;
 
     public Bolum() {
     }
@@ -70,12 +70,12 @@ public class Bolum implements Serializable {
     }
 
     @XmlTransient
-    public List<Universite> getUniversiteList() {
-        return universiteList;
+    public List<Kullaniciozbilgi> getKullaniciozbilgiList() {
+        return kullaniciozbilgiList;
     }
 
-    public void setUniversiteList(List<Universite> universiteList) {
-        this.universiteList = universiteList;
+    public void setKullaniciozbilgiList(List<Kullaniciozbilgi> kullaniciozbilgiList) {
+        this.kullaniciozbilgiList = kullaniciozbilgiList;
     }
 
     @Override

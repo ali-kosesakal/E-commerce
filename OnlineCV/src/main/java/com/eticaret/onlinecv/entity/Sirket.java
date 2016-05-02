@@ -59,6 +59,8 @@ public class Sirket implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date songirtarihi;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sirketID")
+    private List<Sirketpozisyon> sirketpozisyonList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sirketID")
     private List<Ilan> ilanList;
     @JoinColumn(name = "sirketbilgiID", referencedColumnName = "sirketbilgiID")
     @ManyToOne(optional = false)
@@ -105,6 +107,15 @@ public class Sirket implements Serializable {
 
     public void setSongirtarihi(Date songirtarihi) {
         this.songirtarihi = songirtarihi;
+    }
+
+    @XmlTransient
+    public List<Sirketpozisyon> getSirketpozisyonList() {
+        return sirketpozisyonList;
+    }
+
+    public void setSirketpozisyonList(List<Sirketpozisyon> sirketpozisyonList) {
+        this.sirketpozisyonList = sirketpozisyonList;
     }
 
     @XmlTransient

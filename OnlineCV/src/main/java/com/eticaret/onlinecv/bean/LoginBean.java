@@ -56,7 +56,7 @@ public class LoginBean implements Serializable {
             k = ku;
             return navigationBean.redirectKullaniciProfil();
         } else {
-            System.out.println("giris yanlis");
+            System.out.println("giris yanliş");
 
             return navigationBean.redirectIndex();
         }
@@ -73,7 +73,7 @@ public class LoginBean implements Serializable {
         if (si != null) {
             return navigationBean.redirectSirketProfil();
         } else {
-            System.out.println("giriÅŸ yanlÄ±ÅŸ");
+            System.out.println("giriş yanlış");
 
             return navigationBean.redirectIndex();
         }
@@ -81,7 +81,7 @@ public class LoginBean implements Serializable {
     }
     
     public String logout(){
-        Kullanici kisi=null;
+        Kullanici k = null;
         return navigationBean.redirectIndex();
     }
        

@@ -12,7 +12,7 @@
     <h:body>
         Hoşgeldin 
         <h:form id="giris">
-            <p:outputLabel value="#{loginBean.k.ozbilgiID.ad} #{loginBean.k.ozbilgiID.soyad}  " />
+            <p:outputLabel value="#{loginBean.k.ozbilgiID.ad} #{loginBean.k.ozbilgiID.soyad} "/>
 
             <p:commandButton id="logout" process="@this" value="  Çıkış"    action="#{loginBean.logout}"/>
 
@@ -53,7 +53,7 @@
                         </p:inputText>
 
                         <p:outputLabel for="dtarihid" value="Doğum Tarihi" style="font-weight:bold"/>  
-                        <p:calendar id="dtarihid" value="#{guncelleBean.guncelozbilgi.dtarihi}"  navigator="true"  pattern="dd-MM-yyyy"  timeZone="UTC"/>
+                        <p:calendar id="dtarihid" value="#{guncelleBean.guncelozbilgi.dtarihi}"  yearRange="c-50:c+50" navigator="true"  pattern="dd-MM-yyyy"  timeZone="UTC"/>
 
                         <p:outputLabel for="aciklamad" value="Açıklama:" style="font-weight:bold"/>                    
                         <p:inputTextarea id="aciklamad" value="#{guncelleBean.guncelozbilgi.aciklama}" /> 
@@ -73,6 +73,9 @@
                 <h:panelGrid id="egitimbil" columns="2" cellpadding="5">
                     <p:outputLabel for="universite" value="Üniversite:" style="font-weight:bold"/>                    
                     <p:outputLabel id="universite" value="#{loginBean.k.ozbilgiID.universiteID.okuladi}" />                         
+
+                    <p:outputLabel for="bolum" value="Bölüm :" style="font-weight:bold"/>                    
+                    <p:outputLabel id="bolum" value="#{loginBean.k.ozbilgiID.bolumbolumID.bolumadi}" />  
 
                     <p:outputLabel for="unibastarihi" value="Üniversite Başlama Tarihi:" style="font-weight:bold"/>                    
                     <h:outputText  id="unibastarihi" value="#{loginBean.k.ozbilgiID.unibastarihi}" >                         
@@ -108,6 +111,11 @@
                             <f:selectItems value="#{guncelleBean.universiteListe}" var="universite" itemValue="#{universite.universiteID}" itemLabel="#{universite.okuladi}" />
                         </p:selectOneMenu>
 
+                        <p:outputLabel for="bolumd" value="Bölüm :" style="font-weight:bold"/> 
+                        <p:selectOneMenu id="bolumd" value="#{guncelleBean.guncelBolumId}">
+                            <f:selectItems value="#{guncelleBean.bolumListe}" var="bolum" itemValue="#{bolum.bolumID}" itemLabel="#{bolum.bolumadi}" />
+                        </p:selectOneMenu>
+
                         <p:outputLabel for="unibastarihid" value="Üniversite Başlama Tarihi :" style="font-weight:bold" />                    
                         <p:calendar id="unibastarihid" value="#{guncelleBean.guncelozbilgi.unibastarihi}"  yearRange="c-50:c+50"  navigator="true"  pattern="yyyy" timeZone="UTC"/>
 
@@ -132,21 +140,58 @@
 
             </p:dialog>
 
-            <p:tabView value="#{guncelleBean.projelist}" var="proje">
-                <p:tab title=" #{proje.projeadi}">
-                    <h:panelGrid columns="2" cellpadding="5">
-                                           
-                        <h:outputText value="Proje Açıklama :" style="font-weight: bold"/>
-                        <h:outputText value="#{proje.aciklama}" />
+            <p:panel id="projeler" header="Proje Bilgileri">
+                <p:tabView id="projelertab" value="#{kullaniciProjeBean.kulProjeList}"  var="kulproje">
+                    <p:tab id="projeAdi" title=" #{kulproje.projeadi}" >
+                        <h:panelGrid columns="2" cellpadding="10">
 
-                        <h:outputText value="Teknolojiler :" style="font-weight: bold"/>
-                        <h:outputText  />
+                            <p:outputLabel for="proaciklama" value="Proje Açıklama :" style="font-weight: bold"/>
+                            <p:outputLabel id="proaciklama" value="#{kulproje.aciklama}" />
 
-                        <h:outputText value="Color:" style="font-weight: bold"/>
-                        <h:outputText />
+                            <p:outputLabel value="Proje ID :" style="font-weight: bold"/>
+                            <p:outputLabel id="kulprojeID" value="#{kulproje.projeID}" />
+
+                            <p:commandButton id="projeduzenle" value="Proje Düzenle" action="#{kullaniciProjeBean.projeIdGetir(kulproje)}" process="@this" update=":giris:kulProGun" oncomplete="PF('kullaniciProGun').show()"  />
+
+                        </h:panelGrid>
+                    </p:tab>                
+                </p:tabView>
+                <p:commandButton id="projeekle" value="Proje Ekle"  process="@this" icon="ui-icon-extlink"  update=":giris:kulProEkle" oncomplete="PF('kullaniciProEkle').show()"  />
+
+            </p:panel>
+
+            <p:dialog  header="Proje Güncelle" widgetVar="kullaniciProGun" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel  id="kulProGun" styleClass="opanel" style="font-size: 12px !important;">
+                    <h:panelGrid   columns="2"  columnClasses="label,value" styleClass="gpanel" cellpadding="5" >
+
+                        <p:outputLabel for="projeadig" value="Proje Adı :" style="font-weight:bold"/>                        
+                        <p:inputTextarea id="projeadig" value="#{kullaniciProjeBean.projeGuncelle.projeadi}" />
+
+                        <p:outputLabel for="proaciklamag" value="Proje Açıklaması :" style="font-weight:bold"/>                        
+                        <p:inputTextarea id="proaciklamag"  value="#{kullaniciProjeBean.projeGuncelle.aciklama}"/> 
+
+                        <p:commandButton id="projeGun" value="Güncelle"  action="#{kullaniciProjeBean.projeUpdate}"  update=":giris:projeler" oncomplete="PF('kullaniciProGun').hide()" />
+
                     </h:panelGrid>
-                </p:tab>
-            </p:tabView>
+                </p:outputPanel>
+            </p:dialog>
+
+            <p:dialog  header="Proje Ekle" widgetVar="kullaniciProEkle" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="kulProEkle" styleClass="opanel" style="font-size: 12px !important;">
+                    <h:panelGrid  columns="2"  columnClasses="label,value" styleClass="gpanel" cellpadding="5" >
+
+                        <p:outputLabel for="projeadid" value="Proje Adı :" style="font-weight:bold"/>                        
+                        <p:inputTextarea id="projeadid" value="#{kullaniciProjeBean.projeekle.projeadi}" />
+
+                        <p:outputLabel for="proaciklamad" value="Proje Açıklaması :" style="font-weight:bold"/>                        
+                        <p:inputTextarea id="proaciklamad" value="#{kullaniciProjeBean.projeekle.aciklama}" /> 
+
+                        <p:commandButton id="projeekle2" value="Ekle"  action="#{kullaniciProjeBean.projeEkle}"  update=":giris:projeler" oncomplete="PF('kullaniciProEkle').hide()" />
+
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
 
         </h:form>
     </h:body>
