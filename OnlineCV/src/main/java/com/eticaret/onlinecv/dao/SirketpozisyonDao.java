@@ -5,13 +5,13 @@
  */
 package com.eticaret.onlinecv.dao;
 
-import com.eticaret.onlinecv.entity.Sirketozbilgi;
+import com.eticaret.onlinecv.entity.Pozisyon;
 
 /**
  *
  * @author ali
  */
-public interface SirketozbilgiDao {
-    public void guncelle(Sirketozbilgi s);
+public interface SirketpozisyonDao {
+    public Pozisyon getirPozisyon();
     
 }

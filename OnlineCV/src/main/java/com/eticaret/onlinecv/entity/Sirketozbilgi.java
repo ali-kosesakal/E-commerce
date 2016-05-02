@@ -41,7 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sirketozbilgi.findByKurultarihi", query = "SELECT s FROM Sirketozbilgi s WHERE s.kurultarihi = :kurultarihi"),
     @NamedQuery(name = "Sirketozbilgi.findBySirketaciklama", query = "SELECT s FROM Sirketozbilgi s WHERE s.sirketaciklama = :sirketaciklama"),
     @NamedQuery(name = "Sirketozbilgi.findByWebadres", query = "SELECT s FROM Sirketozbilgi s WHERE s.webadres = :webadres"),
-    @NamedQuery(name = "Sirketozbilgi.findByLogo", query = "SELECT s FROM Sirketozbilgi s WHERE s.logo = :logo")})
+    @NamedQuery(name = "Sirketozbilgi.findByLogo", query = "SELECT s FROM Sirketozbilgi s WHERE s.logo = :logo"),
+    @NamedQuery(name = "Sirketozbilgi.findByAcikpozisyon", query = "SELECT s FROM Sirketozbilgi s WHERE s.acikpozisyon = :acikpozisyon")})
 public class Sirketozbilgi implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,6 +72,9 @@ public class Sirketozbilgi implements Serializable {
     @Size(max = 45)
     @Column(name = "logo")
     private String logo;
+    @Size(max = 45)
+    @Column(name = "acikpozisyon")
+    private String acikpozisyon;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sirketbilgiID")
     private List<Sirket> sirketList;
 
@@ -143,6 +147,14 @@ public class Sirketozbilgi implements Serializable {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    public String getAcikpozisyon() {
+        return acikpozisyon;
+    }
+
+    public void setAcikpozisyon(String acikpozisyon) {
+        this.acikpozisyon = acikpozisyon;
     }
 
     @XmlTransient

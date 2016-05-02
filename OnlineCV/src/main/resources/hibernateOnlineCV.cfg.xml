@@ -3,10 +3,11 @@
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/OnlineCV?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">kosesakal</property>
+    <property name="hibernate.connection.characterEncoding">utf8</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <mapping class="com.eticaret.onlinecv.entity.Basvuru"/>
     <mapping class="com.eticaret.onlinecv.entity.Bolum"/>
     <mapping class="com.eticaret.onlinecv.entity.Dil"/>
@@ -17,13 +18,15 @@
     <mapping class="com.eticaret.onlinecv.entity.Kullaniciozbilgi"/>
     <mapping class="com.eticaret.onlinecv.entity.Kullaniciproje"/>
     <mapping class="com.eticaret.onlinecv.entity.Kullaniciteknoloji"/>
+    <mapping class="com.eticaret.onlinecv.entity.Pozisyon"/>
+    <mapping class="com.eticaret.onlinecv.entity.Pozisyonilan"/>
     <mapping class="com.eticaret.onlinecv.entity.Proje"/>
     <mapping class="com.eticaret.onlinecv.entity.Projeteknoloji"/>
     <mapping class="com.eticaret.onlinecv.entity.Sirket"/>
     <mapping class="com.eticaret.onlinecv.entity.Sirketozbilgi"/>
     <mapping class="com.eticaret.onlinecv.entity.Sirketproje"/>
+    <mapping class="com.eticaret.onlinecv.entity.Sirketpozisyon"/>
     <mapping class="com.eticaret.onlinecv.entity.Sirketteknoloji"/>
-    <mapping class="com.eticaret.onlinecv.entity.Sprojetek"/>
     <mapping class="com.eticaret.onlinecv.entity.Teknoloji"/>
     <mapping class="com.eticaret.onlinecv.entity.Universite"/>
   </session-factory>

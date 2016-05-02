@@ -5,10 +5,13 @@
  */
 package com.eticaret.onlinecv.dao;
 
+import com.eticaret.onlinecv.entity.Teknoloji;
+import java.util.List;
+
 /**
  *
  * @author ali
  */
 public interface TeknolojDao {
-    
+    public List<Teknoloji> getirProjeTeknoloj(Integer id);
 }

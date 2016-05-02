@@ -17,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -54,11 +53,9 @@ public class Teknoloji implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teknolojiID")
     private List<Ilanteknoloji> ilanteknolojiList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teknolojiID")
-    private List<Sprojetek> sprojetekList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teknolojiID")
     private List<Kullaniciteknoloji> kullaniciteknolojiList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "teknolojiID")
-    private Projeteknoloji projeteknoloji;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teknolojiID")
+    private List<Projeteknoloji> projeteknolojiList;
 
     public Teknoloji() {
     }
@@ -110,15 +107,6 @@ public class Teknoloji implements Serializable {
     }
 
     @XmlTransient
-    public List<Sprojetek> getSprojetekList() {
-        return sprojetekList;
-    }
-
-    public void setSprojetekList(List<Sprojetek> sprojetekList) {
-        this.sprojetekList = sprojetekList;
-    }
-
-    @XmlTransient
     public List<Kullaniciteknoloji> getKullaniciteknolojiList() {
         return kullaniciteknolojiList;
     }
@@ -127,12 +115,13 @@ public class Teknoloji implements Serializable {
         this.kullaniciteknolojiList = kullaniciteknolojiList;
     }
 
-    public Projeteknoloji getProjeteknoloji() {
-        return projeteknoloji;
+    @XmlTransient
+    public List<Projeteknoloji> getProjeteknolojiList() {
+        return projeteknolojiList;
     }
 
-    public void setProjeteknoloji(Projeteknoloji projeteknoloji) {
-        this.projeteknoloji = projeteknoloji;
+    public void setProjeteknolojiList(List<Projeteknoloji> projeteknolojiList) {
+        this.projeteknolojiList = projeteknolojiList;
     }
 
     @Override

@@ -2,6 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Üye Ol</title>
@@ -17,9 +19,9 @@
                 <p:inputText id="k_soyad" value="#{uyeOl.kozbilgi.soyad}" requiredMessage="Soyadınızı Giriniz"  required="true"/>
                 <p:outputLabel for="k_email" value="Email"/>
                 <p:inputText id="k_email" value="#{uyeOl.kullanici.email}" requiredMessage="Email Giriniz" required="true"/>
-                <p:outputLabel for="pwd1" value="Parola : *" />
+                <h:outputLabel for="pwd1" value="Parola : *" />
                 <p:password id="pwd1" value="#{uyeOl.kullanici.parola}" validatorMessage="Şifreler Eşleşmiyor" match="pwd2" label="Parola" required="true" />
-                <p:outputLabel for="pwd2" value="Parola Tekrar : *" />
+                <h:outputLabel for="pwd2" value="Parola Tekrar : *" />
                 <p:password id="pwd2" value="#{uyeOl.kullanici.parola}" label="Parola Tekrar" required="true" />
             </h:panelGrid>
             <p:commandButton value="Kaydı Tamamla"  action="#{uyeOl.kaydet}"/>

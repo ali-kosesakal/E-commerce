@@ -13,9 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -38,10 +38,10 @@ public class Projeteknoloji implements Serializable {
     @Column(name = "idprojeteknoloji")
     private Integer idprojeteknoloji;
     @JoinColumn(name = "teknolojiID", referencedColumnName = "teknolojiID")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Teknoloji teknolojiID;
     @JoinColumn(name = "projeID", referencedColumnName = "projeID")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Proje projeID;
 
     public Projeteknoloji() {

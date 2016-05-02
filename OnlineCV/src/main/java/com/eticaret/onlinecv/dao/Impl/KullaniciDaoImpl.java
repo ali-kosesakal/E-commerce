@@ -10,6 +10,8 @@ import com.eticaret.onlinecv.dao.KullaniciDao;
 import com.eticaret.onlinecv.entity.Kullanici;
 import com.eticaret.onlinecv.entity.Kullaniciozbilgi;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -72,7 +74,6 @@ public class KullaniciDaoImpl implements KullaniciDao, Serializable {
     public void guncelle(Kullanici k) {
 
         session = HibernateUtil.getSessionFactory().openSession();
-
         System.out.println("girdi");
         tx = session.beginTransaction();
         

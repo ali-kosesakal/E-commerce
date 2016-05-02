@@ -9,14 +9,13 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -24,39 +23,39 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author ali
  */
 @Entity
-@Table(name = "sirketproje")
+@Table(name = "sirketpozisyon")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Sirketproje.findAll", query = "SELECT s FROM Sirketproje s"),
-    @NamedQuery(name = "Sirketproje.findBySirketprojeID", query = "SELECT s FROM Sirketproje s WHERE s.sirketprojeID = :sirketprojeID")})
-public class Sirketproje implements Serializable {
+    @NamedQuery(name = "Sirketpozisyon.findAll", query = "SELECT s FROM Sirketpozisyon s"),
+    @NamedQuery(name = "Sirketpozisyon.findByIdsirketpozisyon", query = "SELECT s FROM Sirketpozisyon s WHERE s.idsirketpozisyon = :idsirketpozisyon")})
+public class Sirketpozisyon implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "sirketprojeID")
-    private Integer sirketprojeID;
+    @NotNull
+    @Column(name = "idsirketpozisyon")
+    private Integer idsirketpozisyon;
     @JoinColumn(name = "sirketID", referencedColumnName = "sirketID")
     @ManyToOne(optional = false)
     private Sirket sirketID;
-    @JoinColumn(name = "projeID", referencedColumnName = "projeID")
+    @JoinColumn(name = "pozisyonID", referencedColumnName = "pozisyonID")
     @ManyToOne(optional = false)
-    private Proje projeID;
+    private Pozisyon pozisyonID;
 
-    public Sirketproje() {
+    public Sirketpozisyon() {
     }
 
-    public Sirketproje(Integer sirketprojeID) {
-        this.sirketprojeID = sirketprojeID;
+    public Sirketpozisyon(Integer idsirketpozisyon) {
+        this.idsirketpozisyon = idsirketpozisyon;
     }
 
-    public Integer getSirketprojeID() {
-        return sirketprojeID;
+    public Integer getIdsirketpozisyon() {
+        return idsirketpozisyon;
     }
 
-    public void setSirketprojeID(Integer sirketprojeID) {
-        this.sirketprojeID = sirketprojeID;
+    public void setIdsirketpozisyon(Integer idsirketpozisyon) {
+        this.idsirketpozisyon = idsirketpozisyon;
     }
 
     public Sirket getSirketID() {
@@ -67,29 +66,29 @@ public class Sirketproje implements Serializable {
         this.sirketID = sirketID;
     }
 
-    public Proje getProjeID() {
-        return projeID;
+    public Pozisyon getPozisyonID() {
+        return pozisyonID;
     }
 
-    public void setProjeID(Proje projeID) {
-        this.projeID = projeID;
+    public void setPozisyonID(Pozisyon pozisyonID) {
+        this.pozisyonID = pozisyonID;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (sirketprojeID != null ? sirketprojeID.hashCode() : 0);
+        hash += (idsirketpozisyon != null ? idsirketpozisyon.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sirketproje)) {
+        if (!(object instanceof Sirketpozisyon)) {
             return false;
         }
-        Sirketproje other = (Sirketproje) object;
-        if ((this.sirketprojeID == null && other.sirketprojeID != null) || (this.sirketprojeID != null && !this.sirketprojeID.equals(other.sirketprojeID))) {
+        Sirketpozisyon other = (Sirketpozisyon) object;
+        if ((this.idsirketpozisyon == null && other.idsirketpozisyon != null) || (this.idsirketpozisyon != null && !this.idsirketpozisyon.equals(other.idsirketpozisyon))) {
             return false;
         }
         return true;
@@ -97,7 +96,7 @@ public class Sirketproje implements Serializable {
 
     @Override
     public String toString() {
-        return "com.eticaret.onlinecv.entity.Sirketproje[ sirketprojeID=" + sirketprojeID + " ]";
+        return "com.eticaret.onlinecv.entity.Sirketpozisyon[ idsirketpozisyon=" + idsirketpozisyon + " ]";
     }
     
 }

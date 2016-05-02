@@ -17,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -50,9 +49,11 @@ public class Proje implements Serializable {
     @Column(name = "aciklama")
     private String aciklama;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projeID")
+    private List<Sirketproje> sirketprojeList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projeID")
     private List<Kullaniciproje> kullaniciprojeList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "projeID")
-    private Projeteknoloji projeteknoloji;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projeID")
+    private List<Projeteknoloji> projeteknolojiList;
 
     public Proje() {
     }
@@ -86,6 +87,15 @@ public class Proje implements Serializable {
     }
 
     @XmlTransient
+    public List<Sirketproje> getSirketprojeList() {
+        return sirketprojeList;
+    }
+
+    public void setSirketprojeList(List<Sirketproje> sirketprojeList) {
+        this.sirketprojeList = sirketprojeList;
+    }
+
+    @XmlTransient
     public List<Kullaniciproje> getKullaniciprojeList() {
         return kullaniciprojeList;
     }
@@ -94,12 +104,13 @@ public class Proje implements Serializable {
         this.kullaniciprojeList = kullaniciprojeList;
     }
 
-    public Projeteknoloji getProjeteknoloji() {
-        return projeteknoloji;
+    @XmlTransient
+    public List<Projeteknoloji> getProjeteknolojiList() {
+        return projeteknolojiList;
     }
 
-    public void setProjeteknoloji(Projeteknoloji projeteknoloji) {
-        this.projeteknoloji = projeteknoloji;
+    public void setProjeteknolojiList(List<Projeteknoloji> projeteknolojiList) {
+        this.projeteknolojiList = projeteknolojiList;
     }
 
     @Override

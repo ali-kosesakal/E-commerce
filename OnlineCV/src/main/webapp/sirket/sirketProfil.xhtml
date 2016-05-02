@@ -5,7 +5,6 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pe="http://primefaces.org/ui/extensions">
-    
     <h:head>
         <title>Şirket Profili</title>
     </h:head>
@@ -14,7 +13,7 @@
             <p:outputLabel value="Hoşgeldiniz  "/>
             <p:outputLabel value="#{loginBean.s.sirketbilgiID.sirketadi}"/>
             <p:commandButton id="logout" value="Çıkış" action="#{loginBean.logout}"/>
-            <br/>
+            
             <p:panel header="Şirket Bilgileri">
 
                 <h:panelGrid id="sirketbilgi" columns="2" cellpadding="5">
@@ -42,25 +41,39 @@
                     <h:panelGrid  columns="2"  columnClasses="label,value" styleClass="gpanel" cellpadding="5" >
                         
                         <p:outputLabel for="adresg" value="Adres :" style="font-weight:bold"/>
-                        <p:inputTextarea id="adresg" value="#{sirketGuncelleBean.sirketOzbilgi.sirketadres}" />
+                        <p:inputTextarea id="adresg" value="#{sirketBean.sirketOzbilgi.sirketadres}" />
                         <p:outputLabel for="telg" value="Telefon:" style="font-weight:bold" />                    
-                        <p:inputText  id="telg" value="#{sirketGuncelleBean.sirketOzbilgi.sirkettel}"  maxlength="10" >
+                        <p:inputText  id="telg" value="#{sirketBean.sirketOzbilgi.sirkettel}"  maxlength="10" >
                             <pe:keyFilter regEx="/[\d\-]/"/>
                         </p:inputText>
                         <p:outputLabel for="kurultarih" value="Kuruluş Tarihi:" style="font-weight:bold"/>  
-                        <p:calendar id="kurultarih" value="#{sirketGuncelleBean.sirketOzbilgi.kurultarihi}"
+                        <p:calendar id="kurultarih" value="#{sirketBean.sirketOzbilgi.kurultarihi}" yearRange="c-50:c+50"
                                     navigator="true"  pattern="dd-MM-yyyy"  timeZone="UTC"/>
                         <p:outputLabel for="webadresg" value="Web Adresi" style="font-weight: bold"/>
-                        <p:inputText id="webadresg" value="#{sirketGuncelleBean.sirketOzbilgi.webadres}"/>
+                        <p:inputText id="webadresg" value="#{sirketBean.sirketOzbilgi.webadres}"/>
                         <p:outputLabel for="aciklamag" value="Açıklama:" style="font-weight:bold"/>                    
-                        <p:inputTextarea id="aciklamag" value="#{sirketGuncelleBean.sirketOzbilgi.sirketaciklama}" /> 
-                        <p:commandButton id="update" value="Güncelle"  action="#{sirketGuncelleBean.update}"
+                        <p:inputTextarea id="aciklamag" value="#{sirketBean.sirketOzbilgi.sirketaciklama}" /> 
+                        <p:commandButton id="update" value="Güncelle"  action="#{sirketBean.update}"
                                          update=":sirketprofil:sirketbilgi" oncomplete="PF('sirketGuncelle').hide()" />
 
                     </h:panelGrid>
                 </p:outputPanel>
 
             </p:dialog>
+            
+            <p:tabView value="#{sirketBean.projeList}" var="proje">
+                <p:tab title=" #{proje.projeadi}">
+                    <h:panelGrid columns="2" cellpadding="5">
+                                           
+                        <h:outputText value="Proje Açıklama :" style="font-weight: bold"/>
+                        <h:outputText value="#{proje.aciklama}" />
+
+                        <h:outputText value="Teknolojiler :" style="font-weight: bold"/>
+                        <h:outputText value="#{sirketBean.getirTeknoloji(proje)}" />
+
+                    </h:panelGrid>
+                </p:tab>
+            </p:tabView>
             
             
         </h:form>

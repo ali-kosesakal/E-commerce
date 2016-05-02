@@ -18,6 +18,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
@@ -32,7 +33,7 @@ public class LoginBean implements Serializable {
     NavigationBean navigationBean = new NavigationBean();
 
     KullaniciDao kullaniciDao = new KullaniciDaoImpl();
-    SirketDao sirketDao = (SirketDao) new SirketDaoImpl();
+    SirketDao sirketDao =  new SirketDaoImpl();
     
     Sirket s = new Sirket();
     Kullanici k = new Kullanici();
@@ -70,6 +71,8 @@ public class LoginBean implements Serializable {
 //    
         Sirket si = sirketDao.girsKontrol(s);
 
+        System.out.println(si.getEmail());
+        System.out.println(si.getParola());
         if (si != null) {
             s = si;
             return navigationBean.redirectSirketProfil();

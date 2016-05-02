@@ -6,8 +6,6 @@
 package com.eticaret.onlinecv.bean.kullanici;
 
 import com.eticaret.onlinecv.bean.LoginBean;
-import com.eticaret.onlinecv.bean.LoginBean;
-import com.eticaret.onlinecv.bean.NavigationBean;
 import com.eticaret.onlinecv.bean.NavigationBean;
 import com.eticaret.onlinecv.dao.Impl.KullaniciDaoImpl;
 import com.eticaret.onlinecv.dao.Impl.KullaniciozbilgiDaoImpl;
@@ -23,7 +21,6 @@ import com.eticaret.onlinecv.entity.Kullaniciproje;
 import com.eticaret.onlinecv.entity.Proje;
 import com.eticaret.onlinecv.entity.Universite;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -42,6 +39,7 @@ public class GuncelleBean implements Serializable {
     
     NavigationBean navigationBean = new NavigationBean();
     
+   @ManagedProperty("#{loginBean}")
     private LoginBean loku = new LoginBean();
     
     KullaniciozbilgiDao kullaniciOzDao = new KullaniciozbilgiDaoImpl();
@@ -79,10 +77,9 @@ public class GuncelleBean implements Serializable {
     public void init() {
         guncelozbilgi = loku.getK().getOzbilgiID();
         universiteListe = uniDao.getirUniversiteList();
-        System.out.println(guncelozbilgi.getAciklama());
-        System.out.println(guncelozbilgi.getAgno());
-       // projelist = projeDao.getirProjeList();
-       // kulProjeList = guncelk.getKullaniciprojeList();
+//        projelist = projeDao.getirKullaniciProjeList(loku.getK().getKullaniciID());
+        System.out.println("        "+ projelist.get(0).getAciklama());
+//        kulProjeList = guncelk.getKullaniciprojeList();
     }
     
     public void update() {

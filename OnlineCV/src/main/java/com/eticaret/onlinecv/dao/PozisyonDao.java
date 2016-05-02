@@ -5,20 +5,14 @@
  */
 package com.eticaret.onlinecv.dao;
 
-import com.eticaret.onlinecv.entity.Proje;
+import com.eticaret.onlinecv.entity.Pozisyon;
 import java.util.List;
-import com.eticaret.onlinecv.entity.Kullanici;
 
 /**
  *
  * @author ali
  */
-public interface ProjeDao {
-    
-    public List<Proje> getirProjeList();
-    
-    public Proje getirProje(Integer id);
-    
-    public List<Proje> getirSirketProjeList(Integer id);
+public interface PozisyonDao {
+    public List<Pozisyon> getirPozisyon();
     
 }

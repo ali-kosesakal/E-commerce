@@ -6,6 +6,7 @@
 package com.eticaret.onlinecv.dao.Impl;
 
 import com.eticaret.onlinecv.bean.HibernateUtil;
+import com.eticaret.onlinecv.dao.KullaniciDao;
 import com.eticaret.onlinecv.dao.KullaniciozbilgiDao;
 import com.eticaret.onlinecv.entity.Kullaniciozbilgi;
 
@@ -20,14 +21,14 @@ import org.hibernate.Transaction;
  */
 public class KullaniciozbilgiDaoImpl implements KullaniciozbilgiDao, Serializable {
 
-    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    SessionFactory sessionFactory;
 
     Session session = null;
     Transaction tx = null;
 
     @Override
     public void guncelle(Kullaniciozbilgi k) {
-        session = sessionFactory.openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         System.out.println("güncell adres: " + k.getAdres());
         System.out.println("girdi");
         System.out.println("                -"+k.getTel());
