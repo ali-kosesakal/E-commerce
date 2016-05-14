@@ -45,7 +45,7 @@ public class Proje implements Serializable {
     @Size(max = 45)
     @Column(name = "projeadi")
     private String projeadi;
-    @Size(max = 300)
+    @Size(max = 1000)
     @Column(name = "aciklama")
     private String aciklama;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projeID")

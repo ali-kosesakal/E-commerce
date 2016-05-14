@@ -14,9 +14,11 @@ import com.eticaret.onlinecv.entity.Proje;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -44,7 +46,7 @@ public class KullaniciProjeBean implements Serializable {
     Proje projeekle = new Proje();
     Proje projeGuncelle = new Proje();
     Integer projeID;
-    
+
     @PostConstruct
     public void init() {
         kulProjeList = kulProjeDao.getirProjeList(loku.k.getKullaniciID());
@@ -54,17 +56,42 @@ public class KullaniciProjeBean implements Serializable {
         projeDao.projeEkle(projeekle);
         kulproje2.setKullaniciID(loku.k);
         kulproje2.setProjeID(projeekle);
-        kulProjeDao.projeEkle(kulproje2);
+        kulProjeDao.kullaniciProjeEkle(kulproje2);
         kulProjeList.add(projeekle);
+        temizle();
     }
-    
-    public void projeIdGetir(Proje p){
+
+    public void projeIdGetir(Proje p) {
         projeGuncelle = p;
         System.out.println("proje Id =" + projeGuncelle.getProjeID());
     }
-    
-    public void projeUpdate(){
+
+    public void projeUpdate() {
         projeDao.projeGuncelle(projeGuncelle);
+        temizle();
+        
+    }
+
+    public void projeSil(Proje p) {
+        kulproje2.setKullaniciID(loku.k);
+        kulproje2.setProjeID(p);
+        projeDao.projeSil(p);
+        kulProjeDao.kullaniciProjeSil(kulproje2);
+        kulProjeList.remove(p);
+    }
+    
+    public void temizle(){
+        projeGuncelle = new Proje();
+        projeekle = new Proje();
+    }
+
+    public void silMesaj() {
+        addMessage("Veritabanı Bilgilendirme", "Projeniz başarıyla silindi.");
+    }
+
+    public void addMessage(String summary, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     public LoginBean getLoku() {
@@ -106,6 +133,5 @@ public class KullaniciProjeBean implements Serializable {
     public void setProjeGuncelle(Proje projeGuncelle) {
         this.projeGuncelle = projeGuncelle;
     }
-    
-    
+
 }

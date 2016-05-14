@@ -21,4 +21,6 @@ public interface ProjeDao {
     public void projeEkle(Proje p);
     
     public void projeGuncelle(Proje p);
+    
+    public void projeSil(Proje p);
 }

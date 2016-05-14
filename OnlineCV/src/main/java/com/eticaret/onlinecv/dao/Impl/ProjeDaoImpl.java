@@ -10,6 +10,7 @@ import com.eticaret.onlinecv.dao.ProjeDao;
 import com.eticaret.onlinecv.entity.Proje;
 import java.io.Serializable;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -56,11 +57,9 @@ public class ProjeDaoImpl implements ProjeDao, Serializable {
     }
 
     @Override
+    @Transactional
     public void projeGuncelle(Proje p) {
-        session = HibernateUtil.getSessionFactory().openSession();
-        System.out.println("güncell adres: " + p.getProjeadi());
-        System.out.println("girdi");
-        System.out.println("                -"+p.getAciklama());
+        session = HibernateUtil.getSessionFactory().openSession();       
         tx = session.beginTransaction();
 
         Proje proje = (Proje) session.get(Proje.class, p.getProjeID());
@@ -77,7 +76,15 @@ public class ProjeDaoImpl implements ProjeDao, Serializable {
         tx2.commit();
         session2.close();
 
-        System.out.println("Kaydetmiş olması lazım :D ");
+    }
+
+    @Override
+    public void projeSil(Proje p) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+        session.delete(p);
+        tx.commit();
+        session.close();
     }
 
 }

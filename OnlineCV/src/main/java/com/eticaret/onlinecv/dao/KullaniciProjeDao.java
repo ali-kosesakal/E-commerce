@@ -16,11 +16,10 @@ import java.util.List;
  */
 public interface KullaniciProjeDao {
     
-    public List<Kullaniciproje> getirProjeList();
 
     public List<Proje> getirProjeList(Integer kullaniciID);
 
-    public List<Proje> getirProjeList(Kullanici k);
-
-    public void projeEkle(Kullaniciproje p);
+    public void kullaniciProjeEkle(Kullaniciproje p);
+    
+    public void kullaniciProjeSil(Kullaniciproje p);
 }

@@ -140,25 +140,36 @@
 
             </p:dialog>
 
-            <p:panel id="projeler" header="Proje Bilgileri">
-                <p:tabView id="projelertab" value="#{kullaniciProjeBean.kulProjeList}"  var="kulproje">
-                    <p:tab id="projeAdi" title=" #{kulproje.projeadi}" >
-                        <h:panelGrid columns="2" cellpadding="10">
+            <p:panel  header="Proje Bilgileri">
+                <p:outputPanel id="projeler" styleClass="opanel">
+                    <p:tabView id="projelertab" value="#{kullaniciProjeBean.kulProjeList}"  var="kulproje">
+                        <p:tab id="projeAdi" title=" #{kulproje.projeadi}" >
+                            <h:panelGrid columns="2" cellpadding="10">
 
-                            <p:outputLabel for="proaciklama" value="Proje Açıklama :" style="font-weight: bold"/>
-                            <p:outputLabel id="proaciklama" value="#{kulproje.aciklama}" />
+                                <p:outputLabel for="proaciklama" value="Proje Açıklama :" style="font-weight: bold"/>
+                                <p:outputLabel id="proaciklama" value="#{kulproje.aciklama}" />
 
-                            <p:outputLabel value="Proje ID :" style="font-weight: bold"/>
-                            <p:outputLabel id="kulprojeID" value="#{kulproje.projeID}" />
+                                <p:outputLabel value="Proje ID :" style="font-weight: bold"/>
+                                <p:outputLabel id="kulprojeID" value="#{kulproje.projeID}" />
 
-                            <p:commandButton id="projeduzenle" value="Proje Düzenle" action="#{kullaniciProjeBean.projeIdGetir(kulproje)}" process="@this" update=":giris:kulProGun" oncomplete="PF('kullaniciProGun').show()"  />
+                                <p:commandButton id="projeduzenle" value="Proje Güncelle" action="#{kullaniciProjeBean.projeIdGetir(kulproje)}" process="@this" update=":giris:kulProGun" oncomplete="PF('kullaniciProGun').show()"  />
+                                <p:growl id="message" showDetail="true" />
 
-                        </h:panelGrid>
-                    </p:tab>                
-                </p:tabView>
-                <p:commandButton id="projeekle" value="Proje Ekle"  process="@this" icon="ui-icon-extlink"  update=":giris:kulProEkle" oncomplete="PF('kullaniciProEkle').show()"  />
+                                <p:commandButton value="Projeyi Sil" action="#{kullaniciProjeBean.projeSil(kulproje)}" actionListener="#{kullaniciProjeBean.silMesaj}" update=":giris:projeler">
+                                    <p:confirm header="Bilgilendirme" message="Projeyi silmek istediğinize eminmisiniz?" icon="ui-icon-alert" />
+                                </p:commandButton>
 
+                            </h:panelGrid>
+                        </p:tab>                
+                    </p:tabView>
+                    <p:commandButton id="projeekle" value="Proje Ekle"  process="@this" update=":giris:kulProEkle" icon="ui-icon-extlink"  oncomplete="PF('kullaniciProEkle').show()"  />
+                </p:outputPanel>
             </p:panel>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Evet" update=":giris:projeler" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Hayır" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
 
             <p:dialog  header="Proje Güncelle" widgetVar="kullaniciProGun" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel  id="kulProGun" styleClass="opanel" style="font-size: 12px !important;">
@@ -168,11 +179,14 @@
                         <p:inputTextarea id="projeadig" value="#{kullaniciProjeBean.projeGuncelle.projeadi}" />
 
                         <p:outputLabel for="proaciklamag" value="Proje Açıklaması :" style="font-weight:bold"/>                        
-                        <p:inputTextarea id="proaciklamag"  value="#{kullaniciProjeBean.projeGuncelle.aciklama}"/> 
+                        <p:inputTextarea id="proaciklamag"  value="#{kullaniciProjeBean.projeGuncelle.aciklama}" counter="display" maxlength="1000" counterTemplate="{0} characters remaining." autoResize="false" /> 
+                        <h:outputText id="display" />
+                        <p:message for="proaciklamag" display="icon" />
+                        <p:commandButton id="projeGun" value="Projeyi Güncelle"  action="#{kullaniciProjeBean.projeUpdate}"  update=":giris:projeler" oncomplete="PF('kullaniciProGun').hide()" />
 
-                        <p:commandButton id="projeGun" value="Güncelle"  action="#{kullaniciProjeBean.projeUpdate}"  update=":giris:projeler" oncomplete="PF('kullaniciProGun').hide()" />
 
                     </h:panelGrid>
+
                 </p:outputPanel>
             </p:dialog>
 
@@ -186,8 +200,7 @@
                         <p:outputLabel for="proaciklamad" value="Proje Açıklaması :" style="font-weight:bold"/>                        
                         <p:inputTextarea id="proaciklamad" value="#{kullaniciProjeBean.projeekle.aciklama}" /> 
 
-                        <p:commandButton id="projeekle2" value="Ekle"  action="#{kullaniciProjeBean.projeEkle}"  update=":giris:projeler" oncomplete="PF('kullaniciProEkle').hide()" />
-
+                        <p:commandButton id="projeekle2" value="Ekle" action="#{kullaniciProjeBean.projeEkle}"  update=":giris:projeler" oncomplete="PF('kullaniciProEkle').hide()" />
                     </h:panelGrid>
                 </p:outputPanel>
             </p:dialog>
